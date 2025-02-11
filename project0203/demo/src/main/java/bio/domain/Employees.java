@@ -37,7 +37,8 @@ public class Employees extends EmployeesEntity{
 
     private EmployeeRole role;
 
-    public void change(String employeename, String password, LocalDate hiredate, LocalDateTime terminationdate, String department, String position, String contactnumber){
+    public void change(String employeeid,String employeename, String password, LocalDate hiredate, LocalDateTime terminationdate, String department, String position, String contactnumber){
+        this.employeeid = employeeid;
         this.employeename = employeename;
         this.password = password;
         this.hiredate = hiredate;

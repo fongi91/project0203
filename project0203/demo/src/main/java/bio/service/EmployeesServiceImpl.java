@@ -44,7 +44,7 @@ public class EmployeesServiceImpl implements EmployeesService{
     public void modify(EmployeesDTO employeesDTO){
         Optional<Employees> result = employeesRepository.findById(employeesDTO.getEno());
         Employees employees = result.orElseThrow();
-        employees.change(employeesDTO.getEmployeename(), employeesDTO.getPassword(), employeesDTO.getHiredate(), employeesDTO.getTerminationdate(), employeesDTO.getDepartment(), employeesDTO.getPosition(), employeesDTO.getContactnumber());
+        employees.change(employeesDTO.getEmployeeid(), employeesDTO.getEmployeename(), employeesDTO.getPassword(), employeesDTO.getHiredate(), employeesDTO.getTerminationdate(), employeesDTO.getDepartment(), employeesDTO.getPosition(), employeesDTO.getContactnumber());
         employeesRepository.save(employees);
     }
 
