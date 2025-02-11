@@ -35,7 +35,7 @@ public class BioInvReceivingSearchImpl implements BioInvReceivingSearch {
                 switch (type) {
                     case "p": typeConditions.add("b.productCode LIKE :keyword"); break;
                     case "q": typeConditions.add("CAST(b.quantity AS string) LIKE :keyword"); break;
-                    case "c": typeConditions.add("b.customer LIKE :keyword"); break;
+                    case "c": typeConditions.add("b.supplier LIKE :keyword"); break;
                     case "l": typeConditions.add("b.warehouseLocation LIKE :keyword"); break;
                     case "r": typeConditions.add("b.registeredBy LIKE :keyword"); break;
                 }
@@ -82,6 +82,3 @@ public class BioInvReceivingSearchImpl implements BioInvReceivingSearch {
     }
 
 }
-
-
-
