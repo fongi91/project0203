@@ -23,17 +23,14 @@ public class BioProductPageResponseDTO {
     // 실제 할일 목록 정보들
     private List<BioProductDTO> dtoList;
 
-
-
-
     @Builder
     public BioProductPageResponseDTO(
-            BioProdutPageRequestDTO bioProdutPageRequestDTO,
+            BioProductPageRequestDTO bioProductPageRequestDTO,
             List<BioProductDTO> dtoList,
             int total
     ) {
-        this.page = bioProdutPageRequestDTO.getPage();
-        this.size = bioProdutPageRequestDTO.getSize();
+        this.page = bioProductPageRequestDTO.getPage();
+        this.size = bioProductPageRequestDTO.getSize();
 
         this.dtoList = dtoList;
         this.total = total;

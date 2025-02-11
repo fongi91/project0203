@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/basic.html}">
+      layout:decorate="~{bio/basic.html}">
 <head>
     <title>bio Product Register</title>
 </head>
@@ -49,16 +49,10 @@
                             <input type="text" name="productionType" class="form-control"
                                    placeholder="생산유형을 입력하세요.">
                         </div>
-
-
-
                         <div class="input-group mb-3">
                             <span class="input-group-text">등록자</span>
-                            <input type="text" class="form-control" th:value="${employeeName}" readonly>
-
+                            <input type="text" name="registeredBy" class="form-control" th:value="${employee.employeename}" readonly>
                         </div>
-
-
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">설명</span>
@@ -102,3 +96,4 @@
 </script>
 
 </script>
+</html>>

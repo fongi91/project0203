@@ -1,10 +1,8 @@
 package bio.service;
 
 import bio.domain.BioProduct;
-import bio.dto.BioProductDTO;
-import bio.dto.BioProdutPageRequestDTO;
-import bio.dto.BioProductPageResponseDTO;
-import bio.mapper.BioProductMapper;
+import bio.dto.*;
+//import bio.mapper.BioProductMapper;
 import bio.repository.BioProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,11 +21,12 @@ import java.util.stream.Collectors;
 public class BioProductServiceImpl implements BioProductService {
     private final ModelMapper modelMapper;
     private final BioProductRepository bioProductRepository;
-    private final BioProductMapper bioProductMapper;
+    //private final BioProductMapper bioProductMapper;
 
 
     @Override
-    public Long register(BioProductDTO bioProductDTO){
+    public Long
+    register(BioProductDTO bioProductDTO){
         BioProduct bioProduct = modelMapper.map(bioProductDTO, BioProduct.class);
         Long bioNo = bioProductRepository.save(bioProduct).getBioNo();
         return bioNo;
@@ -55,11 +54,11 @@ public class BioProductServiceImpl implements BioProductService {
     }
 
     @Override
-    public BioProductPageResponseDTO list(BioProdutPageRequestDTO bioProdutPageRequestDTO){
+    public BioProductPageResponseDTO list(BioProductPageRequestDTO bioProductPageRequestDTO){
         //브라우저에서 요청한 파라미터 값 세팅
-        String[] types = bioProdutPageRequestDTO.getTypes();
-        String keyword = bioProdutPageRequestDTO.getKeyword();
-        Pageable pageable = bioProdutPageRequestDTO.getPageable("bioNo");
+        String[] types = bioProductPageRequestDTO.getTypes();
+        String keyword = bioProductPageRequestDTO.getKeyword();
+        Pageable pageable = bioProductPageRequestDTO.getPageable("bioNo");
 
         Page<BioProduct> result = bioProductRepository.searchAll(types, keyword, pageable);
 
@@ -67,12 +66,11 @@ public class BioProductServiceImpl implements BioProductService {
                 .map(bioProduct -> modelMapper.map(bioProduct, BioProductDTO.class)).collect(Collectors.toList());
 
         return BioProductPageResponseDTO.builder()
-                .bioProdutPageRequestDTO(bioProdutPageRequestDTO)
+                .bioProductPageRequestDTO(bioProductPageRequestDTO)
                 .dtoList(dtoList)
                 .total((int)result.getTotalElements())
                 .build();
     }
-
 
     @Override
     public List<Object[]> getEfficacyGroupDistribution(){

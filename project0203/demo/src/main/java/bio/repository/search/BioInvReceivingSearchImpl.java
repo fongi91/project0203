@@ -1,7 +1,6 @@
 package bio.repository.search;
 
-import bio.domain.BioInvShipping;
-import bio.domain.Employees;
+import bio.domain.BioInvReceiving;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -16,13 +15,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BioInvShippingSearchImpl implements BioInvShippingSearch {
+public class BioInvReceivingSearchImpl implements BioInvReceivingSearch {
     private final EntityManager entityManager;
 
     @Override
-    public Page<BioInvShipping> searchAll(String[] types, String keyword, String dateKeyword, Pageable pageable) {
-        String baseQuery = "SELECT b FROM BioInvShipping b WHERE b.shippingId > 0";
-        String countQueryBase = "SELECT COUNT(b) FROM BioInvShipping b WHERE b.shippingId > 0";
+    public Page<BioInvReceiving> searchAll(String[] types, String keyword, String dateKeyword, Pageable pageable) {
+        String baseQuery = "SELECT b FROM BioInvReceiving b WHERE b.receivingId > 0";
+        String countQueryBase = "SELECT COUNT(b) FROM BioInvReceiving b WHERE b.receivingId > 0";
 
         List<String> conditions = new ArrayList<>();
         boolean hasKeyword = keyword != null && !keyword.isEmpty();
@@ -48,16 +47,16 @@ public class BioInvShippingSearchImpl implements BioInvShippingSearch {
 
         //  출고일자 검색 조건 추가
         if (hasDateKeyword) {
-            conditions.add("b.shippingDate = :shippingDate");
+            conditions.add("b.receivingDate = :receivingDate");
         }
 
         //  WHERE 조건을 동적으로 추가
         String conditionString = conditions.isEmpty() ? "" : " AND " + String.join(" AND ", conditions);
-        String finalQuery = baseQuery + conditionString + " ORDER BY b.shippingId DESC";
+        String finalQuery = baseQuery + conditionString + " ORDER BY b.receivingId DESC";
         String countQueryFinal = countQueryBase + conditionString;
 
         //  JPQL 쿼리 실행
-        TypedQuery<BioInvShipping> query = entityManager.createQuery(finalQuery, BioInvShipping.class);
+        TypedQuery<BioInvReceiving> query = entityManager.createQuery(finalQuery, BioInvReceiving.class);
         TypedQuery<Long> countQuery = entityManager.createQuery(countQueryFinal, Long.class);
 
         //  검색어 파라미터 설정 (존재할 때만)
@@ -68,20 +67,19 @@ public class BioInvShippingSearchImpl implements BioInvShippingSearch {
 
         if (hasDateKeyword) {
             LocalDate date = LocalDate.parse(dateKeyword);
-            query.setParameter("shippingDate", date);
-            countQuery.setParameter("shippingDate", date);
+            query.setParameter("receivingDate", date);
+            countQuery.setParameter("receivingDate", date);
         }
 
         //  페이징 처리
         query.setFirstResult((int) pageable.getOffset());
         query.setMaxResults(pageable.getPageSize());
 
-        List<BioInvShipping> list = query.getResultList();
+        List<BioInvReceiving> list = query.getResultList();
         long count = countQuery.getSingleResult();
 
         return new PageImpl<>(list, pageable, count);
     }
-
 
 }
 

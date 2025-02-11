@@ -1,7 +1,7 @@
 package bio.service;
 
 import bio.dto.BioProductDTO;
-import bio.dto.BioProdutPageRequestDTO;
+import bio.dto.BioProductPageRequestDTO;
 import bio.dto.BioProductPageResponseDTO;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public interface BioProductService {
     void remove(Long bioNo);
 
     //목록 검색기능 선언
-    BioProductPageResponseDTO list(BioProdutPageRequestDTO bioProdutPageRequestDTO);
+    BioProductPageResponseDTO list(BioProductPageRequestDTO bioProductPageRequestDTO);
 
     List<Object[]> getEfficacyGroupDistribution();
 

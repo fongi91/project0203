@@ -21,7 +21,7 @@
             <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
                th:href="@{/bio/Employeeslist}">사원관리</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" th:href="@{/bio/bioProductList}">제품관리</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" href="#!">Events</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" th:href="@{/bio/BioInvReceivinglist}">입고관리</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" th:href="@{/bio/BioInvShippinglist}">출고관리</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" href="#!">Profile</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" href="#!">Status</a>
@@ -51,11 +51,11 @@
                 </div>
                 <!-- login 관련 추가 -->
                 <div class="loginInfo">
-                    <div class="login" th:if="${user == null}">
+                    <div class="login" th:if="${employee == null}">
                         <button th:onclick="location.href='/bio/login'">로그인</button>
                     </div>
-                    <div class="logout" th:unless="${user == null}">
-                        <h6>[[${employeeName}]]님 환영합니다.</h6>
+                    <div class="logout" th:unless="${employee == null}">
+                        <h6>[[${employee.employeename}]]님 환영합니다.</h6>
                         <button th:onclick="location.href='/bio/logout'">로그아웃</button>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 //package bio.controller;
 //
 //import bio.domain.EmployeeRole;
-//import bio.domain.User;
+//import bio.domain.Employees;
 //import bio.service.BioProductService;
 //import lombok.RequiredArgsConstructor;
 //import lombok.extern.log4j.Log4j2;
@@ -23,11 +23,11 @@
 //    @GetMapping("/dashboard")
 //    public String dashboard(HttpSession session, Model model) {
 //        // 세션에서 사용자 정보 가져오기
-//        User user = (User) session.getAttribute("user");
-//        if (user != null) {
-//            model.addAttribute("user", user);
-//            model.addAttribute("employeeName", user.getEmployeeName());
-//            model.addAttribute("isAdmin", user.getRole().equals(EmployeeRole.ADMIN));  // 관리자 여부 추가
+//        Employees employees = (Employees) session.getAttribute("employee");
+//        if (employees != null) {
+//            model.addAttribute("employee", employees);
+//            model.addAttribute("employeeName", employees.getEmployeename());
+//            model.addAttribute("isAdmin", employees.getRole().equals(EmployeeRole.ADMIN));  // 관리자 여부 추가
 //            List<Object[]> efficacyGroupData = bioProductService.getEfficacyGroupDistribution();
 //            model.addAttribute("efficacyGroupData", efficacyGroupData);  // 모델에 데이터 담기
 //            return "bio/dashboard"; // 대시보드 페이지로 이동

@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface EmployeesRepository extends JpaRepository<Employees, Long>, EmployeesSearch {
     //Page<Employees> searchAll(String[] types, String keyword, Pageable pageable);
-    Optional<Employees> findByEmployeeId(String employeeId);
+
+    Optional<Employees> findByEmployeeid(String employeeid);
 }

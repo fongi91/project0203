@@ -2,6 +2,7 @@ package bio.config;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,4 +19,5 @@ public class RootConfig {
 
         return modelMapper;
     }
+
 }

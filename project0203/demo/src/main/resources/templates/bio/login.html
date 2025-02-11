@@ -18,14 +18,13 @@
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header">
                                 <h3 class="text-center font-weight-light my-4">Login</h3>
-                                <h6 class="text-center font-weight-light my-4" style="color:red;">모든 페이지는 로그인 후 이용이 가능합니다.</h6>
                             </div>
                             <div class="card-body">
                                 <form th:method="post" th:action="@{/bio/login}" th:object="${loginDTO}">
                                     <div class="form-group">
-                                        <label th:for="employeeId">User Id</label>
+                                        <label th:for="employeeid">User Id</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1"
-                                               th:field="*{employeeId}" aria-describedby="emailHelp" placeholder="Enter User Id"/>
+                                               th:field="*{employeeid}" aria-describedby="emailHelp" placeholder="Enter User Id"/>
                                     </div>
                                     <div class="form-group">
                                         <label th:for="password">Password</label>

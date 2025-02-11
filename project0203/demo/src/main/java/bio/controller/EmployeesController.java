@@ -1,15 +1,13 @@
 package bio.controller;
 
+import bio.domain.EmployeeRole;
+import bio.domain.Employees;
 import bio.dto.EmployeesDTO;
 import bio.dto.EmployeesPageRequestDTO;
 import bio.dto.EmployeesPageResponseDTO;
 import bio.service.EmployeesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,18 +24,23 @@ public class EmployeesController {
     private final EmployeesService employeesService;
 
     @GetMapping("/Employeeslist")
-    public void list(EmployeesPageRequestDTO employeesPageRequestDTO, Model model){
+    public void list(EmployeesPageRequestDTO employeesPageRequestDTO,
+                     Model model) {
+
         EmployeesPageResponseDTO<EmployeesDTO> responseDTO = employeesService.list(employeesPageRequestDTO);
         log.info(responseDTO);
         model.addAttribute("responseDTO", responseDTO);
     }
 
     @GetMapping("/Employeesregister")
-    public void registerGET(){
+    public void registerGET(@ModelAttribute("employee") Employees employee){
 
     }
     @PostMapping("/Employeesregister")
-    public String registerPost(@Valid EmployeesDTO employeesDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String registerPost(@ModelAttribute("employee") Employees employee,
+                               @Valid EmployeesDTO employeesDTO,
+                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
             log.info("has errors......");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
@@ -49,7 +52,10 @@ public class EmployeesController {
     }
 
     @GetMapping({"/Employeesread", "/Employeesmodify"})
-    public void read(Long eno, EmployeesPageRequestDTO employeesPageRequestDTO, Model model) {
+    public void read(@ModelAttribute("employee") Employees employee,
+                     Long eno,
+                     EmployeesPageRequestDTO employeesPageRequestDTO,
+                     Model model) {
         EmployeesDTO employeesDTO = employeesService.readOne(eno);
 
         log.info(employeesDTO);
@@ -58,7 +64,11 @@ public class EmployeesController {
     }
 
     @PostMapping("/Employeesmodify")
-    public String modify(EmployeesPageRequestDTO employeesPageRequestDTO, @Valid EmployeesDTO employeesDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String modify(@ModelAttribute("employee") Employees employee,
+                         EmployeesPageRequestDTO employeesPageRequestDTO,
+                         @Valid EmployeesDTO employeesDTO,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
             String link = employeesPageRequestDTO.getLink();
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
@@ -72,7 +82,9 @@ public class EmployeesController {
     }
 
     @PostMapping("/Employeesremove")
-    public String remove(Long eno, RedirectAttributes redirectAttributes){
+    public String remove(@ModelAttribute("employee") Employees employee,
+                         Long eno,
+                         RedirectAttributes redirectAttributes){
         employeesService.remove(eno);
         redirectAttributes.addFlashAttribute("result", "removed");
         return "redirect:/bio/Employeeslist";

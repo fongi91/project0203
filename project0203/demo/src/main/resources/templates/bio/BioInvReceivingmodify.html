@@ -4,7 +4,7 @@
       layout:decorate="~{bio/basic.html}">
 <head>
     <meta charset="UTF-8">
-    <title>BioInvShipping Modify</title>
+    <title>BioInvReceiving Modify</title>
 </head>
 <div layout:fragment="content">
     <div class="row mt-3">
@@ -14,30 +14,30 @@
                     <p><b>수 정</b></p>
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/bio/BioInvShippingmodify}" method="post" id="f1">
+                    <form th:action="@{/bio/BioInvReceivingmodify}" method="post" id="f1">
                         <div class="input-group mb-3">
-                            <span class="input-group-text" style="width:100px; justify-content: center;">출고번호</span>
-                            <input type="text" class="form-control" th:value="${dto.shippingId}" name="shippingId" readonly>
+                            <span class="input-group-text" style="width:100px; justify-content: center;">입고번호</span>
+                            <input type="text" class="form-control" th:value="${dto.receivingId}" name="receivingId" readonly>
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">제품코드</span>
                             <input type="text" class="form-control" th:value="${dto.productCode}" name="productCode">
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" style="width:100px; justify-content: center;">출고수량</span>
+                            <span class="input-group-text" style="width:100px; justify-content: center;">입고수량</span>
                             <input type="text" class="form-control" th:value="${dto.quantity}" name="quantity">
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" style="width:100px; justify-content: center;">납품업체</span>
-                            <input type="text" class="form-control" th:value="${dto.customer}" name="customer">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">공급업체</span>
+                            <input type="text" class="form-control" th:value="${dto.supplier}" name="supplier">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">창고위치</span>
                             <input type="text" class="form-control" th:value="${dto.warehouseLocation}" name="warehouseLocation">
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" style="width:100px; justify-content: center;">출고일자</span>
-                            <input type="date" class="form-control" th:value="${dto.shippingDate}" name="shippingDate">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">입고일자</span>
+                            <input type="text" class="form-control" th:value="${dto.receivingDate}" name="receivingDate">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">등록자</span>
@@ -48,8 +48,8 @@
                             <input type="text" class="form-control" th:value="${dto.registeredDate}" name="registeredDate">
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" style="width:100px; justify-content: center;">출고완료</span>
-                            <input type="checkbox" name="isShipped" th:checked="${dto.isShipped}" th:value="true">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">입고완료</span>
+                            <input type="checkbox" name="isReceived" th:checked="${dto.isReceived}" th:value="true">
                         </div>
 
                         <div class="my-4">
@@ -82,14 +82,14 @@
     }
 
     //수정 버튼
-    const link = [[${bioInvShippingPageRequestDTO.getLink()}]]
+    const link = [[${bioInvReceivingPageRequestDTO.getLink()}]]
     const formObj = document.querySelector("#f1")
 
     document.querySelector(".modBtn").addEventListener("click", function(e){
         e.preventDefault()
         e.stopPropagation()
 
-        formObj.action = `/bio/BioInvShippingmodify?${link}`
+        formObj.action = `/bio/BioInvReceivingmodify?${link}`
         formObj.method = 'post'
         formObj.submit()
     },false)
@@ -100,7 +100,7 @@
         e.stopPropagation()
 
         formObj.reset()
-        self.location = `/bio/BioInvShippinglist?${link}`
+        self.location = `/bio/BioInvReceivinglist?${link}`
     },false)
 
     //삭제 처리버튼
@@ -108,7 +108,7 @@
         e.preventDefault()
         e.stopPropagation()
 
-        formObj.action = `/bio/BioInvShippingremove`
+        formObj.action = `/bio/BioInvReceivingremove`
         formObj.method = 'post'
         formObj.submit()
     },false)

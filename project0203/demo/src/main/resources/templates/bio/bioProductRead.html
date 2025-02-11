@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/basic.html}">
+      layout:decorate="~{bio/basic.html}">
 <head>
     <title>Board Read</title>
 </head>
@@ -69,7 +69,7 @@
 
                     <!--버튼틀-->
                     <div class="my-4">
-                        <div class="float-end" th:with="link = ${bioProdutPageRequestDTO.getLink()}">
+                        <div class="float-end" th:with="link = ${bioProductPageRequestDTO.getLink()}">
                             <a th:href="|@{/bio/bioProductList}?${link}|" class="text-decoration-none">
                                 <button type="button" class="btn btn-primary">List</button>
                             </a>

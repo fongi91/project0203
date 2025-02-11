@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/basic.html}">
+      layout:decorate="~{bio/basic.html}">
 <head>
     <title>제품 수정</title>
 </head>
@@ -84,7 +84,7 @@
 
 <script layout:fragment="script" th:inline="javascript">
 
-    const link = [[${bioProdutPageRequestDTO.getLink()}]];
+    const link = [[${bioProductPageRequestDTO.getLink()}]];
     const formObj = document.querySelector('#f1');
 
     //modify 버튼 클릭(바닐라)

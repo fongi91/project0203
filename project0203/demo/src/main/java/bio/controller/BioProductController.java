@@ -1,7 +1,7 @@
 package bio.controller;
 
 import bio.dto.BioProductDTO;
-import bio.dto.BioProdutPageRequestDTO;
+import bio.dto.BioProductPageRequestDTO;
 import bio.dto.BioProductPageResponseDTO;
 import bio.service.BioProductService;
 import lombok.extern.log4j.Log4j2;
@@ -25,15 +25,11 @@ public class BioProductController {
     private final BioProductService bioProductService;
 
     @GetMapping("/bioProductList")
-    public void bioProductList(BioProdutPageRequestDTO bioProdutPageRequestDTO, Model model) {
-        BioProductPageResponseDTO bioProductPageResponseDTO = bioProductService.list(bioProdutPageRequestDTO);
+    public void bioProductList(BioProductPageRequestDTO bioProductPageRequestDTO, Model model) {
+        BioProductPageResponseDTO bioProductPageResponseDTO = bioProductService.list(bioProductPageRequestDTO);
         log.info("responseDTO:" + bioProductPageResponseDTO);
-
-
         model.addAttribute("responseDTO", bioProductPageResponseDTO);
-
     }
-
 
 
     @GetMapping("/bioProductRegister")
@@ -57,21 +53,21 @@ public class BioProductController {
     }
 
     @GetMapping({"/bioProductRead", "/bioProductModify"})
-    public void read(Long bioNo, BioProdutPageRequestDTO bioProdutPageRequestDTO, Model model){
+    public void read(Long bioNo, BioProductPageRequestDTO bioProductPageRequestDTO, Model model){
         BioProductDTO bioProductDTO = bioProductService.readOne(bioNo);
         log.info(bioProductDTO);
         model.addAttribute("dto", bioProductDTO);
     }
 
     @PostMapping("/bioProductModify")
-    public String modify(BioProdutPageRequestDTO bioProdutPageRequestDTO,
+    public String modify(BioProductPageRequestDTO bioProductPageRequestDTO,
                          @Valid BioProductDTO bioProductDTO,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes){
         log.info("bioProduct modify post...." + bioProductDTO);
         if(bindingResult.hasErrors()){
             log.info("bindingResult has errors!!!!!");
-            String link = bioProdutPageRequestDTO.getLink();
+            String link = bioProductPageRequestDTO.getLink();
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addAttribute("bioNo", bioProductDTO.getBioNo());
             return "redirect:/bio/bioProductModify?"+link;
