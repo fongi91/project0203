@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<div layout:fragment="content">
+    <div class="row mt-3">
+        <form action="/bio/Employeeslist" method="get">
+            <div class="col">
+                <input type="hidden" name="size" th:value="${employeesPageRequestDTO.size}">
+                <div class="input-group">
+                    <div class="input-group-perpend">
+                        <select class="form-select" name="type">
+                            <option value="indpc" th:selected="${employeesPageRequestDTO.type == 'indpc'}">전 체</option>
+                            <option value="i" th:selected="${employeesPageRequestDTO.type == 'i'}">사원 번호</option>
+                            <option value="n" th:selected="${employeesPageRequestDTO.type == 'n'}">이 름</option>
+                            <option value="d" th:selected="${employeesPageRequestDTO.type == 'd'}">부 서</option>
+                            <option value="p" th:selected="${employeesPageRequestDTO.type == 'p'}">직 책</option>
+                            <option value="c" th:selected="${employeesPageRequestDTO.type == 'c'}">번 호</option>
+                        </select>
+                    </div>
+                    <input type="text" class="form-control" name="keyword" th:value="${employeesPageRequestDTO.keyword}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary searchBtn" type="submit">검 색</button>
+                        <button class="btn btn-outline-secondary clearBtn" type="button">초기화</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Employees
+                </div>
+                <div class="card-body">
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="text-align:center;">사원 번호</th>
+                            <th scope="col" style="text-align:center;">이 름</th>
+                            <th scope="col" style="text-align:center;">입사 날짜</th>
+                            <th scope="col" style="text-align:center;">부 서</th>
+                            <th scope="col" style="text-align:center;">직 책</th>
+                            <th scope="col" style="text-align:center;">번 호</th>
+                        </tr>
+                        </thead>
+                        <tbody th:with="link = ${employeesPageRequestDTO.getLink()}">
+                        <tr th:each="dto:${responseDTO.dtoList}">
+                            <td style="text-align:center;"><a th:href="|@{/bio/Employeesread(eno =${dto.eno})}&${link}|">[[${dto.employeeid}]]</a></td>
+                            <td style="text-align:center;">[[${dto.employeename}]]</td>
+                            <td style="text-align:center;">[[${#temporals.format(dto.hiredate, 'yyyy-MM-dd')}]]</td>
+                            <td style="text-align:center;">[[${dto.department}]]</td>
+                            <td style="text-align:center;">[[${dto.position}]]</td>
+                            <td style="text-align:center;">[[${dto.contactnumber}]]</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--등록 페이지 이동 버튼-->
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='/bio/Employeesregister'" style="background-color:#85A98F">등 록</button>
+                    <!--게시물 페이지-->
+                    <div class="float-end">
+                        <ul class="pagination flex-wrap">
+                            <li class="page-item" th:if="${responseDTO.prev}">
+                                <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
+                            </li>
+                            <th:block th:each="i : ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                                <li th:class="${responseDTO.page == i} ? 'page-item active' : 'page-item'">
+                                    <a class="page-link" th:data-num="${i}">[[${i}]]</a>
+                                </li>
+                            </th:block>
+                            <li class="page-item" th:if="${responseDTO.next}">
+                                <a class="page-link" th:data-num="${responseDTO.end + 1}">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- end row -->
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>처리되었습니다.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+    //페이징 처리
+    document.querySelector(".pagination").addEventListener("click", function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        const target = e.target
+
+        if(target.tagName !== 'A'){
+            return
+        }
+        const num = target.getAttribute("data-num")
+        const formObj = document.querySelector("form")
+        formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
+        formObj.submit();
+    },false)
+
+    document.querySelector(".clearBtn").addEventListener("click", function (e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        self.location = '/bio/Employeeslist'
+    },false)
+
+    //show modal(result값을 받아 modal로 처리)
+    const result = [[${result}]]
+
+    const modal = new bootstrap.Modal(document.querySelector(".modal"))
+
+    if(result){
+        modal.show()
+    }
+</script>

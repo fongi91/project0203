@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>BioInvShipping Register</title>
+</head>
+<div layout:fragment="content">
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    BioInvShipping Register
+                </div>
+                <div class="card-body">
+                    <form action="/bio/BioInvShippingregister" method="post">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">제품코드</span>
+                            <input type="text" name="productCode" class="form-control" placeholder="제품코드를 입력해주세요.">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">출고수량</span>
+                            <input type="text" name="quantity" class="form-control" placeholder="수량을 입력해주세요.">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">납품업체</span>
+                            <input type="text" name="customer" class="form-control" placeholder="납품업체를 입력해주세요.">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">창고위치</span>
+                            <input type="text" name="warehouseLocation" class="form-control" placeholder="창고위치를 입력해주세요.">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">출고날짜</span>
+                            <input type="date" name="shippingDate" class="form-control" placeholder="출고날짜를 입력해주세요.">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">등록자</span>
+                            <input type="text" name="registeredBy" class="form-control" placeholder="등록자를 입력해주세요.">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">출고완료</span>
+                            <input type="checkbox" name="isShipped">
+                        </div>
+
+
+                        <div class="my-4">
+                            <div class="float-end">
+                                <button type="submit" class="btn btn-primary">등 록</button>
+                                <button type="button" class="btn btn-secondary" onclick="window.location.href=document.referrer">취 소</button>
+                            </div>
+                        </div>
+                    </form>
+                </div><!--end card body-->
+            </div><!--end card-->
+        </div><!--end col-->
+    </div><!--end row-->
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+    const errors = [[${errors}]]
+    console.log(errors)
+
+    let errorMsg = ''
+
+    if(errors){
+        for(let i = 0; i < errors.length; i++){
+            errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
+        }
+        alert(errorMsg)
+    }
+</script>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>BioInvShipping Read</title>
+</head>
+<div layout:fragment="content">
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <p><b>조 회</b></p>
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">출고번호</span>
+                        <input type="text" class="form-control" th:value="${dto.shippingId}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">제품코드</span>
+                        <input type="text" class="form-control" th:value="${dto.productCode}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">출고수량</span>
+                        <input type="text" class="form-control" th:value="${dto.quantity}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">납품업체</span>
+                        <input type="text" class="form-control" th:value="${dto.customer}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">창고위치</span>
+                        <input type="text" class="form-control" th:value="${dto.warehouseLocation}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">출고일자</span>
+                        <input type="text" class="form-control" th:value="${dto.shippingDate}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">등록자</span>
+                        <input type="text" class="form-control" th:value="${dto.registeredBy}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">등록일자</span>
+                        <input type="text" class="form-control" th:value="${dto.registeredDate}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">출고완료</span>
+                        <input type="text" class="form-control"
+                               th:value="${dto.isShipped ? 'Y' : 'N'}" readonly>
+                    </div>
+
+                    <div class="my-4">
+                        <div class="float-end" th:with="link = ${bioInvShippingPageRequestDTO.getLink()}">
+                            <a th:href="|@{/bio/BioInvShippingmodify(shippingId=${dto.shippingId})}&${link}|" class="text-decoration-none">
+                                <button type="button" class="btn btn-primary">수 정</button>
+                            </a>
+                            <a th:href="|@{/bio/BioInvShippinglist}?${link}|" class="text-decoration-none">
+                                <button type="button" class="btn btn-secondary">List</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+
+
+</script>

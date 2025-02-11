@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+
+<!--<div layout:fragment="content">-->
+<!--    <h1>제품관리</h1>-->
+<!--</div>-->
+
+
+<div layout:fragment="content">
+    <!-- 검색 화면 ui -->
+    <div class="row mt-3">
+        <form action="/bio/bioProductList" method="get">
+            <div>
+                <h2>제품관리</h2>
+            </div>
+            <div class="col">
+                <input type="hidden" name="size" th:value="${bioProdutPageRequestDTO.size}">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <select class="form-select" name="type">
+                            <option value="">---</option>
+                            <option value="c" th:selected="${bioProdutPageRequestDTO.type =='c'}">카테고리</option>
+                            <option value="g" th:selected="${bioProdutPageRequestDTO.type =='g'}">효능군</option>
+                            <option value="u" th:selected="${bioProdutPageRequestDTO.type =='u'}">포장단위</option>
+                            <option value="n" th:selected="${bioProdutPageRequestDTO.type =='n'}">제품명</option>
+                            <option value="t" th:selected="${bioProdutPageRequestDTO.type =='t'}">생산유형</option>
+                        </select>
+                    </div>
+                    <input type="text" class="form-control" name="keyword" th:value="${bioProdutPageRequestDTO.keyword}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary searchBtn" type="submit">검색</button>
+                        <button class="btn btn-outline-secondary clearBtn" type="button">초기화</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Board List
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Board List</h5>
+                    <!-- 게시물 목록 데이터 -->
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">제품코드</th>
+                            <th scope="col">제품명</th>
+                            <th scope="col">카테고리</th>
+                            <th scope="col">포장단위</th>
+                            <th scope="col">효능군</th>
+                            <th scope="col">생산유형</th>
+                            <th scope="col">등록자</th>
+                            <th scope="col">등록일</th>
+                        </tr>
+                        </thead>
+                        <tbody th:with="link = ${bioProdutPageRequestDTO.getLink()}">
+                        <tr th:each="dto : ${responseDTO.dtoList}">
+                            <!-- <th scope="row">[[${dto.bioNo}]]</th> -->
+
+                            <td>[[${dto.productCode}]]</td>
+                            <td>
+                                <a th:href="|@{/bio/bioProductRead(bioNo=${dto.bioNo})}&${link}|">[[${dto.ProductName}]]</a>
+                            </td>
+                            <td>[[${dto.currentCategory}]]</td>
+                            <td>[[${dto.packagingUnit}]]</td>
+                            <td>[[${dto.efficacyGroup}]]</td>
+                            <td>[[${dto.productionType}]]</td>
+                            <td>[[${dto.registeredBy}]]</td>
+                            <td>[[${#temporals.format(dto.regDate, 'yyyy-MM-dd')}]]</td> <!-- HH:mm -->
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                    <!--등록 버튼 누르면 register 로 이동-->
+                        <button class="btn btn-primary register-button" type="button">등록</button>
+
+
+                    <!--게시물 페이징 UI-->
+                    <div class="float-end">
+                        <ul class="pagination flex-wrap">
+                            <li class="page-item" th:if="${responseDTO.prev}">
+                                <a class="page-link" th:data-num="${responseDTO.start -1}">이전</a>
+                            </li>
+                            <th:block th:each="i : ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                                <li th:class="${responseDTO.page == i} ? 'page-item active' : 'page-item'" >
+                                    <a class="page-link" th:data-num="${i}">[[${i}]]</a>
+                                </li>
+                            </th:block>
+                            <li class="page-item" th:if="${responseDTO.next}">
+                                <a class="page-link"  th:data-num="${responseDTO.end + 1}">다음</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script layout:fragment="script" th:inline="javascript">
+
+    $(document).ready(function(){
+        //clear 버튼
+        $(".clearBtn").click(function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.href = '/bio/bioProductList';
+        });
+
+        $(".register-button").click(function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.href = '/bio/bioProductRegister';
+        });
+
+    });
+
+     $('.pagination').on('click', 'a', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        const target = e.target;
+        const num = target.getAttribute("data-num");
+
+        const formObj = $('form');
+        formObj.append(`<input type='hidden' name='page' value='${num}'>`);
+        formObj.submit();
+
+        });
+
+        //register 후 alert
+        const result = [[${result}]]
+        if(result){
+          alert("작업이 완료되었습니다.");
+        }
+
+</script>

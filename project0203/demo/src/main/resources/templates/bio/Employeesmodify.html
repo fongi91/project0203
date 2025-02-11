@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees Modify</title>
+</head>
+<div layout:fragment="content">
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <p><b>수 정</b></p>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/bio/Employeesmodify}" method="post" id="f1">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">ENO</span>
+                            <input type="text" class="form-control" th:value="${dto.eno}" name="eno" readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">사원 번호</span>
+                            <input type="text" class="form-control" th:value="${dto.employeeid}" name="employeeid">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">이 름</span>
+                            <input type="text" class="form-control" th:value="${dto.employeename}" name="employeename">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">비밀번호</span>
+                            <input type="text" class="form-control" th:value="${dto.password}" name="password">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">입사 날짜</span>
+                            <input type="text" class="form-control" th:value="${dto.hiredate}" name="hiredate">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">퇴사 날짜</span>
+                            <input type="text" class="form-control" th:value="${dto.terminationdate}" name="terminationdate">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">부 서</span>
+                            <input type="text" class="form-control" th:value="${dto.department}" name="department">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">직 책</span>
+                            <input type="text" class="form-control" th:value="${dto.position}" name="position">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">번 호</span>
+                            <input type="text" class="form-control" th:value="${dto.contactnumber}" name="contactnumber">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">작성자</span>
+                            <input type="text" class="form-control" th:value="${dto.registeredby}" name="registeredby">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">등록 날짜</span>
+                            <input type="text" class="form-control" th:value="${dto.registereddate}" readonly>
+                        </div>
+
+                        <div class="my-4">
+                            <div class="float-end">
+                                <button type="button" class="btn btn-primary listBtn">List</button>
+                                <button type="button" class="btn btn-secondary modBtn">수 정</button>
+                                <button type="button" class="btn btn-danger removeBtn">삭 제</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+    //error 처리
+    const errors = [[${errors}]]
+    console.log(errors)
+
+    let errorMsg = ''
+
+    if(errors){
+        for(let i = 0; i < errors.length; i++) {
+            errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
+        }
+        history.replaceState({}, null, null)
+        alert(errorMsg)
+    }
+
+    //수정 버튼
+    const link = [[${employeesPageRequestDTO.getLink()}]]
+    const formObj = document.querySelector("#f1")
+
+    document.querySelector(".modBtn").addEventListener("click", function(e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.action = `/bio/Employeesmodify?${link}`
+        formObj.method = 'post'
+        formObj.submit()
+    },false)
+
+    //List버튼 처리
+    document.querySelector(".listBtn").addEventListener("click", function(e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.reset()
+        self.location = `/bio/Employeeslist?${link}`
+    },false)
+
+    //삭제 처리버튼
+    document.querySelector(".removeBtn").addEventListener("click", function(e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.action = `/bio/Employeesremove`
+        formObj.method = 'post'
+        formObj.submit()
+    },false)
+</script>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<div layout:fragment="content">
+    <div class="row mt-3">
+        <form action="/bio/BioInvShippinglist" method="get">
+            <div class="col">
+                <input type="hidden" name="size" th:value="${bioInvShippingPageRequestDTO.size}">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <select class="form-select" name="type" id="searchType">
+                            <option value="pqclr" th:selected="${bioInvShippingPageRequestDTO.type == 'pqclr'}">전 체</option>
+                            <option value="p" th:selected="${bioInvShippingPageRequestDTO.type == 'p'}">제품코드</option>
+                            <option value="q" th:selected="${bioInvShippingPageRequestDTO.type == 'q'}">출고수량</option>
+                            <option value="c" th:selected="${bioInvShippingPageRequestDTO.type == 'c'}">납품업체</option>
+                            <option value="l" th:selected="${bioInvShippingPageRequestDTO.type == 'l'}">창고위치</option>
+                            <option value="r" th:selected="${bioInvShippingPageRequestDTO.type == 'r'}">등록자</option>
+                            <option value="d" th:selected="${bioInvShippingPageRequestDTO.type == 'd'}">출고일자</option>
+                        </select>
+                    </div>
+
+                    <!-- 일반 검색어 입력 필드 -->
+                    <input type="text" class="form-control" name="keyword" id="keywordInput"
+                           th:value="${bioInvShippingPageRequestDTO.keyword}"
+                           th:style="${bioInvShippingPageRequestDTO.type == 'd' ? 'display:none;' : ''}">
+
+                    <!-- 날짜 검색용 입력 필드 -->
+                    <input type="date" class="form-control" name="dateKeyword" id="dateInput"
+                           th:value="${bioInvShippingPageRequestDTO.keyword}"
+                           th:style="${bioInvShippingPageRequestDTO.type == 'd' ? '' : 'display:none;'}">
+
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary searchBtn" type="submit">검 색</button>
+                        <button class="btn btn-outline-secondary clearBtn" type="button" id="clearBtn">초기화</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    BioInvShipping List
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col", style="text-align:center;">출고번호</th>
+                            <th scope="col", style="text-align:center;">제품코드</th>
+                            <th scope="col", style="text-align:center;">출고수량</th>
+                            <th scope="col", style="text-align:center;">납품업체</th>
+                            <th scope="col", style="text-align:center;">창고위치</th>
+                            <th scope="col", style="text-align:center;">출고일자</th>
+                            <th scope="col", style="text-align:center;">등록자</th>
+                            <th scope="col", style="text-align:center;">등록일자</th>
+                            <th scope="col", style="text-align:center;">출고완료</th>
+                        </tr>
+                        </thead>
+                        <tbody th:with="link = ${bioInvShippingPageRequestDTO.getLink()}">
+                        <tr th:each="dto:${responseDTO.dtoList}">
+                            <td style="text-align:center;"><a th:href="|@{/bio/BioInvShippingread(shippingId =${dto.shippingId})}&${link}|">[[${dto.shippingId}]]</a></td>
+                            <td style="text-align:center;">[[${dto.productCode}]]</td>
+                            <td style="text-align:center;">[[${dto.quantity}]]</td>
+                            <td style="text-align:center;">[[${dto.customer}]]</td>
+                            <td style="text-align:center;">[[${dto.warehouseLocation}]]</td>
+                            <td style="text-align:center;">[[${dto.shippingDate}]]</td>
+                            <td style="text-align:center;">[[${dto.registeredBy}]]</td>
+                            <td style="text-align:center;">[[${dto.registeredDate}]]</td>
+                            <td style="text-align:center;" th:text="${dto.isShipped} ? 'Y' : 'N'"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='/bio/BioInvShippingregister'" style="background-color:#85A98F">등 록</button>
+                    <div class="float-end">
+                        <ul class="pagination flex-wrap">
+                            <li class="page-item" th:if="${responseDTO.prev}">
+                                <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
+                            </li>
+                            <th:block th:each="i : ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                                <li th:class="${responseDTO.page == i} ? 'page-item active' : 'page-item'">
+                                    <a class="page-link" th:data-num="${i}">[[${i}]]</a>
+                                </li>
+                            </th:block>
+                            <li class="page-item" th:if="${responseDTO.next}">
+                                <a class="page-link" th:data-num="${responseDTO.end + 1}">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>처리되었습니다.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+    //페이징 처리
+    document.querySelector(".pagination").addEventListener("click", function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        const target = e.target
+
+        if(target.tagName !== 'A'){
+            return
+        }
+        const num = target.getAttribute("data-num")
+        const formObj = document.querySelector("form")
+        formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
+        formObj.submit();
+    },false)
+
+    //초기화 버튼
+    document.querySelector(".clearBtn").addEventListener("click", function (e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        self.location = '/bio/BioInvShippinglist'
+    },false)
+
+    //show modal(result값을 받아 modal로 처리)
+    const result = [[${result}]]
+
+    const modal = new bootstrap.Modal(document.querySelector(".modal"))
+
+    if(result){
+        modal.show()
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const searchType = document.getElementById("searchType");
+    const keywordInput = document.getElementById("keywordInput");
+    const dateInput = document.getElementById("dateInput");
+    const clearBtn = document.getElementById("clearBtn");
+
+    searchType.addEventListener("change", function () {
+        if (this.value === "d") {
+            keywordInput.style.display = "none";
+            dateInput.style.display = "block";
+            // 출고일자 선택 시 keyword 값을 비우고, dateKeyword로만 검색
+            document.getElementById("keywordInput").value = "";
+            document.getElementById("dateInput").setAttribute("type", "date");  // 날짜 포맷으로 설정
+        } else {
+            keywordInput.style.display = "block";
+            dateInput.style.display = "none";
+        }
+    });
+
+    clearBtn.addEventListener("click", function () {
+        keywordInput.value = "";
+        dateInput.value = "";
+    });
+});
+</script>

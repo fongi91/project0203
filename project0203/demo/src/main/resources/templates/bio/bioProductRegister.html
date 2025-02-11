@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <title>bio Product Register</title>
+</head>
+<div layout:fragment="content">
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h2>제품등록</h2>
+                </div>
+                <div class="card-body"> <!--이 안에 form 태그를 이용해서 입력할 수 있는 부분을 추가한다.-->
+                    <form action="/bio/bioProductRegister" method="post">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">제품코드</span>
+                            <input type="text" name="productCode" class="form-control"
+                                   placeholder="제품 코드를 입력하세요.">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">제품명</span>
+                            <input type="text" name="productName" class="form-control"
+                                   placeholder="제품명을 입력하세요.">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">포장단위</span>
+                            <input type="text" name="packagingUnit" class="form-control"
+                                   placeholder="포장단위를 입력하세요.">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">효능군</span>
+                            <input type="text" name="efficacyGroup" class="form-control"
+                                   placeholder="효능군을 입력하세요.">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">카테고리</span>
+                            <input type="text" name="currentCategory" class="form-control"
+                                   placeholder="카테고리를 입력하세요.">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">생산유형</span>
+                            <input type="text" name="productionType" class="form-control"
+                                   placeholder="생산유형을 입력하세요.">
+                        </div>
+
+
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">등록자</span>
+                            <input type="text" class="form-control" th:value="${employeeName}" readonly>
+
+                        </div>
+
+
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">설명</span>
+                            <textarea class="form-control col-sm-5" rows="3" name="description" ></textarea>
+
+                        </div>
+
+                        <div class="my-4">
+                            <div class="float-end">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                                <button type="button" class="btn btn-secondary listBtn">List</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div><!--end card body-->
+            </div><!--end card-->
+        </div> <!--end col-->
+    </div> <!--end row-->
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+    const errors = [[${errors}]]
+    console.log(errors)
+    let errorMsg = ''
+    if(errors){
+        for(let i=0; i<errors.length;i++){
+            errorMsg += `${errors[i].field}요구사항: ${errors[i].code}\n`
+        }
+        alert(errorMsg);
+    }
+
+
+    //list 버튼 클릭(jquery)
+    $(".listBtn").on("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = `/bio/bioProductList`;
+    });
+</script>
+
+</script>
