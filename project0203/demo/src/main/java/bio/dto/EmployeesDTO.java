@@ -22,8 +22,8 @@ public class EmployeesDTO {
     private String password;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate hiredate;
-
-    private LocalDateTime terminationdate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate terminationdate;
     @NotEmpty
     private String department;
     @NotEmpty

@@ -25,7 +25,7 @@ public class Employees extends EmployeesEntity{
 
     private LocalDate hiredate;
 
-    private LocalDateTime terminationdate;
+    private LocalDate terminationdate;
     @Column(length = 50, nullable = false)
     private String department;
     @Column(length = 50, nullable = false)
@@ -37,7 +37,7 @@ public class Employees extends EmployeesEntity{
 
     private EmployeeRole role;
 
-    public void change(String employeeid,String employeename, String password, LocalDate hiredate, LocalDateTime terminationdate, String department, String position, String contactnumber){
+    public void change(String employeeid,String employeename, String password, LocalDate hiredate, LocalDate terminationdate, String department, String position, String contactnumber){
         this.employeeid = employeeid;
         this.employeename = employeename;
         this.password = password;
