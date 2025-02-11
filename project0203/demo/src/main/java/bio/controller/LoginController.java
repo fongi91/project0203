@@ -59,6 +59,11 @@ public class LoginController {
         return "bio/login";
     }
 
+    @GetMapping("/error")
+    public void error() {
+
+    }
+
     @PostMapping("/login")
     public String login(@ModelAttribute LoginDTO loginDTO,
                         HttpSession session,
