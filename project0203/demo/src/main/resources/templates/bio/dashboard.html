@@ -22,15 +22,32 @@
             <a class="a-tag" th:href="@{/bio/dashboard}"><h1>Bio One</h1></a>
         </div>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
-               th:href="@{/bio/Employeeslist}">사원관리</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" th:href="@{/bio/bioProductList}">제품관리</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" th:href="@{/bio/BioInvReceivinglist}">입고관리</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" th:href="@{/bio/BioInvShippinglist}">출고관리</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" href="#!">Profile</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" href="#!">Status</a>
-            <div th:if="${isAdmin}">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item" th:onclick="location.href='/bio/admin'">관리자 페이지</a>
+            <!-- role 관련 추가 -->
+            <div class="roleInfo">
+                <div th:if="${isAdmin}">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
+                       th:href="@{/bio/Employeeslist}">사원관리</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
+                       th:href="@{/bio/bioProductList}">제품관리</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
+                       th:href="@{/bio/BioInvReceivinglist}">입고관리</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
+                       th:href="@{/bio/BioInvShippinglist}">출고관리</a>
+                </div>
+
+                <div th:if="${isHr}">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
+                       th:href="@{/bio/Employeeslist}">사원관리</a>
+                </div>
+
+                <div th:if="${isLogistics}">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
+                       th:href="@{/bio/bioProductList}">제품관리</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
+                       th:href="@{/bio/BioInvReceivinglist}">입고관리</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
+                       th:href="@{/bio/BioInvShippinglist}">출고관리</a>
+                </div>
             </div>
 
       <div class="company-information">
