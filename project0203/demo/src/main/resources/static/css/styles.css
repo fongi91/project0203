@@ -11059,3 +11059,9 @@ p {
     flex-direction: column;
     gap: 5px;
 }
+
+[type="checkbox"] {
+    width: 50px;
+    height: 50px;
+    accent-color: #5A6C57;
+}
