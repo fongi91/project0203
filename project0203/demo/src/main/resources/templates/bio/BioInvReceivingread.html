@@ -4,18 +4,18 @@
       layout:decorate="~{bio/basic.html}">
 <head>
     <meta charset="UTF-8">
-    <title>BioInvReceiving Read</title>
+    <title>입고관리</title>
 </head>
 <div layout:fragment="content">
     <div class="row mt-3">
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <p><b>조 회</b></p>
+                    <h2>입고관리</h2>
                 </div>
                 <div class="card-body">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" style="width:100px; justify-content: center;">출고번호</span>
+                        <span class="input-group-text" style="width:100px; justify-content: center;">입고번호</span>
                         <input type="text" class="form-control" th:value="${dto.receivingId}" readonly>
                     </div>
                     <div class="input-group mb-3">
@@ -23,7 +23,7 @@
                         <input type="text" class="form-control" th:value="${dto.productCode}" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" style="width:100px; justify-content: center;">출고수량</span>
+                        <span class="input-group-text" style="width:100px; justify-content: center;">입고수량</span>
                         <input type="text" class="form-control" th:value="${dto.quantity}" readonly>
                     </div>
                     <div class="input-group mb-3">
@@ -35,7 +35,7 @@
                         <input type="text" class="form-control" th:value="${dto.warehouseLocation}" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" style="width:100px; justify-content: center;">출고일자</span>
+                        <span class="input-group-text" style="width:100px; justify-content: center;">입고일자</span>
                         <input type="text" class="form-control" th:value="${dto.receivingDate}" readonly>
                     </div>
                     <div class="input-group mb-3">
@@ -47,18 +47,17 @@
                         <input type="text" class="form-control" th:value="${dto.registeredDate}" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" style="width:100px; justify-content: center;">출고완료</span>
+                        <span class="input-group-text" style="width:100px; justify-content: center;">입고완료</span>
                         <input type="text" class="form-control"
-                               th:value="${dto.isReceived ? 'Y' : 'N'}" readonly>
+                               th:value="${dto.isReceived ? '입고완료' : '입고대기'}" readonly>
                     </div>
-
                     <div class="my-4">
                         <div class="float-end" th:with="link = ${bioInvReceivingPageRequestDTO.getLink()}">
                             <a th:href="|@{/bio/BioInvReceivingmodify(receivingId=${dto.receivingId})}&${link}|" class="text-decoration-none">
                                 <button type="button" class="btn btn-primary">수 정</button>
                             </a>
                             <a th:href="|@{/bio/BioInvReceivinglist}?${link}|" class="text-decoration-none">
-                                <button type="button" class="btn btn-secondary">List</button>
+                                <button type="button" class="btn btn-secondary">목 록</button>
                             </a>
                         </div>
                     </div>

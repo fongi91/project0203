@@ -14,7 +14,7 @@ public class BioProduct extends BioProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bioNo;
-    @Column
+    @Column(unique = true)
     private String productCode;
     @Column
     private String productName;
@@ -31,8 +31,12 @@ public class BioProduct extends BioProductEntity {
     @Column
     private String description;
 
-    public void change(String efficacyGroup, String productionType){
+    public void change(String productName, String currentCategory, String packagingUnit, String efficacyGroup, String productionType, String description){
+        this.productName = productName;
+        this.currentCategory = currentCategory;
+        this.packagingUnit = packagingUnit;
         this.efficacyGroup = efficacyGroup;
         this.productionType = productionType;
+        this.description = description;
     }
 }

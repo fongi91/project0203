@@ -13,6 +13,10 @@
                     <h2>제품등록</h2>
                 </div>
                 <div class="card-body"> <!--이 안에 form 태그를 이용해서 입력할 수 있는 부분을 추가한다.-->
+                    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                       <span th:text="${errorMessage}"></span>
+                    </div>
+
                     <form action="/bio/bioProductRegister" method="post">
                         <div class="input-group mb-3">
                             <span class="input-group-text">제품코드</span>
@@ -27,27 +31,46 @@
                         </div>
 
                         <div class="input-group mb-3">
+                            <span class="input-group-text">카테고리</span>
+                            <select class="form-select" name="currentCategory">
+                                <option value="" selected disabled>카테고리를 선택하세요</option>
+                                <option value="cat1">cat1</option>
+                                <option value="cat1">cat2</option>
+                                <option value="cat1">cat3</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-3">
                             <span class="input-group-text">포장단위</span>
-                            <input type="text" name="packagingUnit" class="form-control"
-                                   placeholder="포장단위를 입력하세요.">
+                            <select class="form-select" name="packagingUnit">
+                                <option value="" selected disabled>포장단위를 선택하세요</option>
+                                <option value="주사제">주사제</option>
+                                <option value="유리병">유리병</option>
+                                <option value="건조분말">건조분말</option>
+                            </select>
+
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">효능군</span>
-                            <input type="text" name="efficacyGroup" class="form-control"
-                                   placeholder="효능군을 입력하세요.">
+                            <select class="form-select" name="efficacyGroup">
+                                <option value="" selected disabled>효능군을 선택하세요</option>
+                                <option value="관절염">관절염</option>
+                                <option value="유방암">유방암</option>
+                                <option value="장질환">장질환</option>
+                                <option value="골다공증">골다공증</option>
+                            </select>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">카테고리</span>
-                            <input type="text" name="currentCategory" class="form-control"
-                                   placeholder="카테고리를 입력하세요.">
-                        </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">생산유형</span>
-                            <input type="text" name="productionType" class="form-control"
-                                   placeholder="생산유형을 입력하세요.">
+                            <select class="form-select" name="productionType">
+                                <option value="" selected disabled>생산유형을 선택하세요</option>
+                                <option value="자체생산">자체개발</option>
+                                <option value="공동생산">공동개발</option>
+                                <option value="위탁생산">위탁생산</option>
+                            </select>
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">등록자</span>
@@ -57,14 +80,14 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">설명</span>
                             <textarea class="form-control col-sm-5" rows="3" name="description" ></textarea>
-
                         </div>
 
                         <div class="my-4">
                             <div class="float-end">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Reset</button>
-                                <button type="button" class="btn btn-secondary listBtn">List</button>
+                                <button type="submit" class="btn btn-primary">등 록</button>
+                                <a th:href="|@{/bio/bioProductList}?${link}|" class="text-decoration-none">
+                                    <button type="button" class="btn btn-secondary">목 록</button>
+                                </a>
 
                             </div>
                         </div>
@@ -76,24 +99,38 @@
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
-    const errors = [[${errors}]]
-    console.log(errors)
-    let errorMsg = ''
+    const errors = [[${errors}]];
+    console.log(errors);
+
     if(errors){
+        let errorMsg = '';
         for(let i=0; i<errors.length;i++){
-            errorMsg += `${errors[i].field}요구사항: ${errors[i].code}\n`
+            errorMsg += `${errors[i].field}요구사항: ${errors[i].defaultMessage}\n`
         }
         alert(errorMsg);
     }
 
+    if(errorMessage){
+        alert(errorMessage);
+    }
 
+/*
     //list 버튼 클릭(jquery)
     $(".listBtn").on("click", function(e){
         e.preventDefault();
         e.stopPropagation();
         window.location.href = `/bio/bioProductList`;
     });
+
+
+     //list 버튼 클릭(jquery)
+    $(".listBtn").on("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = `/bio/bioProductList`;
+    });
+    */
 </script>
 
 </script>
-</html>>
+</html>

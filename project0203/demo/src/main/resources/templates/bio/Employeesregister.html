@@ -63,7 +63,11 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">작성자</span>
+
                             <input type="text" name="registeredby" class="form-control" th:value="${employee.employeename}">
+
+                            <input type="text" name="registeredby" class="form-control" th:value="${employee.employeename}" readonly>
+
                         </div>
                         <div class="my-4">
                             <div class="float-end">
@@ -79,15 +83,18 @@
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
-    const errors = [[${errors}]]
-    console.log(errors)
-
-    let errorMsg = ''
+    const errors = [[${errors}]];
+    console.log(errors);
+    let errorMsg = '';
 
     if(errors){
-        for(let i = 0; i < errors.length; i++){
-            errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
+        for(let i=0; i<errors.length; i++){
+             // errors[i].field = 오류가 발생한 필드 이름(예 : productCode)
+             // errors[i].code = 오류코드(예 : NotBlank)
+             // errorMsg += `${errors[i].field} -> ${errors[i].code} \n`;
+             errorMsg += `${errors[i].defaultMessage}\n`; // 친절한 메시지 출력
         }
-        alert(errorMsg)
+        alert(errorMsg);
     }
+
 </script>

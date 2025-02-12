@@ -9,6 +9,19 @@ import javax.servlet.http.HttpSession;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
+    // 로그아웃 후 뒤로가기 방지
+    @Override
+    public void postHandle(HttpServletRequest request,
+                              HttpServletResponse response,
+                              Object handler,
+                              ModelAndView modelAndView) throws Exception {
+
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        response.setHeader("Expires", "0"); // Proxies.
+
+    }
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();

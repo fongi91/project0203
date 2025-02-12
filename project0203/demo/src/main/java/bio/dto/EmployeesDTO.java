@@ -35,6 +35,4 @@ public class EmployeesDTO {
     private String registeredby;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registereddate;
-
-//    private Long role;
 }

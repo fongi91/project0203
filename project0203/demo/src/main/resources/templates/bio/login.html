@@ -14,31 +14,30 @@
         <main>
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-lg-5">
-                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="col-lg-8">
+                        <div class="card shadow-lg border-0 rounded-lg">
                             <div class="card-header">
-                                <h3 class="text-center font-weight-light my-4">Login</h3>
+                                <h2 class="text-center font-weight-bold">Bio One</h2>
                             </div>
                             <div class="card-body">
                                 <form th:method="post" th:action="@{/bio/login}" th:object="${loginDTO}">
                                     <div class="form-group">
-                                        <label th:for="employeeid">User Id</label>
+                                        <label th:for="employeeid"></label>
                                         <input type="text" class="form-control" id="exampleInputEmail1"
-                                               th:field="*{employeeid}" aria-describedby="emailHelp" placeholder="Enter User Id"/>
+                                               th:field="*{employeeid}" aria-describedby="emailHelp" placeholder="아이디를 입력하세요"/>
                                     </div>
                                     <div class="form-group">
-                                        <label th:for="password">Password</label>
+                                        <label th:for="password"></label>
                                         <input type="password" th:field="*{password}" class="form-control"
-                                               id="exampleInputPassword1" placeholder="Password">
+                                               id="exampleInputPassword1" placeholder="비밀번호를 입력하세요">
                                     </div>
 <!--                                    <div class="form-group form-check">-->
-<!--                                        <input type="checkbox" class="form-check-input" id="saveIdCheck">-->
-<!--                                        <label class="form-check-label" for="saveIdCheck">아이디 저장</label>-->
+<!--                                        <input type="checkbox" class="form-check-input" id="rememberMe" th:checked="{cookie.savedUserId != null}">-->
+<!--                                        <label class="form-check-label" for="rememberMe">아이디 저장</label>-->
 <!--                                    </div>-->
                                     <div th:if="${error}" class="text-danger">
                                         <p th:text="${error}"></p>
                                     </div>
-                                    <br/>
                                     <div style="text-align: right;">
                                         <button type="submit" class="btn btn-primary">로그인</button>
                                     </div>
@@ -51,7 +50,7 @@
         </main>
     </div>
     <div id="layoutAuthentication_footer">
-        <footer class="py-4 bg-light mt-auto">
+        <footer class="py-4 bg-light">
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
                     <div class="text-muted">Copyright &copy; Your Website 2023</div>

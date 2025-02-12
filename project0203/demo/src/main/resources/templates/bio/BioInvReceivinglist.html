@@ -2,7 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{bio/basic.html}">
-
+<head>
+    <meta charset="UTF-8">
+    <title>입고관리</title>
+</head>
 <div layout:fragment="content">
     <div class="row mt-3">
         <form action="/bio/BioInvReceivinglist" method="get">
@@ -43,7 +46,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    BioInvReceiving List
+                    <h2>입고관리</h2>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -70,7 +73,7 @@
                             <td style="text-align:center;">[[${dto.receivingDate}]]</td>
                             <td style="text-align:center;">[[${dto.registeredBy}]]</td>
                             <td style="text-align:center;">[[${dto.registeredDate}]]</td>
-                            <td style="text-align:center;" th:text="${dto.isReceived} ? 'Y' : 'N'"></td>
+                            <td style="text-align:center;" th:text="${dto.isReceived} ? '입고완료' : '입고대기'"></td>
                         </tr>
                         </tbody>
                     </table>
