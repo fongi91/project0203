@@ -10,7 +10,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h2>효능군, 생산유형만 수정가능</h2>
+                    <h2>제품수정</h2>
                 </div>
                 <div class="card-body">
                     <form th:action="@{/bio/bioProductModify}" method="post" id="f1">
@@ -26,28 +26,46 @@
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">제품명</span>
-                            <input type="text" class="form-control" th:value="${dto.productName}" name="productName" readonly>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">포장단위</span>
-                            <input type="text" class="form-control" th:value="${dto.packagingUnit}" name="packagingUnit" readonly>
+                            <input type="text" class="form-control" th:value="${dto.productName}" name="productName">
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">카테고리</span>
-                            <input type="text" class="form-control" th:value="${dto.currentCategory}" name="currentCategory" readonly>
+                            <select class="form-select" name="currentCategory">
+                                <option value="cat1" th:selected="${dto.currentCategory == 'cat1'}">cat1</option>
+                                <option value="cat1" th:selected="${dto.currentCategory == 'cat2'}">cat2</option>
+                                <option value="cat1" th:selected="${dto.currentCategory == 'cat3'}">cat3</option>
+                            </select>
                         </div>
 
                         <div class="input-group mb-3">
+                            <span class="input-group-text">포장단위</span>
+                            <select class="form-select" name="packagingUnit">
+                                <option value="주사제" th:selected="${dto.packagingUnit == '주사제'}">주사제</option>
+                                <option value="유리병" th:selected="${dto.packagingUnit == '유리병'}">유리병</option>
+                                <option value="건조분말" th:selected="${dto.packagingUnit == '건조분말'}">건조분말</option>
+                            </select>
+                        </div>
+
+
+                        <div class="input-group mb-3">
                             <span class="input-group-text">효능군</span>
-                            <input type="text" class="form-control" th:value="${dto.efficacyGroup}" name="efficacyGroup">
+
+                            <select class="form-select" name="efficacyGroup">
+                                <option value="관절염" th:selected="${dto.efficacyGroup == '관절염'}">관절염</option>
+                                <option value="유방암" th:selected="${dto.efficacyGroup == '유방암'}">유방암</option>
+                                <option value="장질환" th:selected="${dto.efficacyGroup == '장질환'}">장질환</option>
+                            </select>
                         </div>
 
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">생산유형</span>
-                            <input type="text" class="form-control" th:value="${dto.productionType}" name="productionType">
+                            <select class="form-select" name="productionType">
+                                <option value="자체개발" th:selected="${dto.efficacyGroup == '자체개발'}">자체개발</option>
+                                <option value="공동개발" th:selected="${dto.efficacyGroup == '공동개발'}">공동개발</option>
+                                <option value="위탁생산" th:selected="${dto.efficacyGroup == '위탁생산'}">위탁생산</option>
+                            </select>
                         </div>
 
                         <div class="input-group mb-3">
@@ -56,21 +74,28 @@
                         </div>
 
 
+
                         <div class="input-group mb-3">
                             <span class="input-group-text">등록일자</span>
                             <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
                         </div>
 
                         <div class="input-group mb-3">
-                            <span class="input-group-text">수정일자</span>
-                            <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+                            <span class="input-group-text">설명</span>
+                            <textarea class="form-control col-sm-5" rows="3" th:text="${dto.description}" name="description"></textarea>
                         </div>
+
+
+<!--                        <div class="input-group mb-3">-->
+<!--                            <span class="input-group-text">수정일자</span>-->
+<!--                            <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>-->
+<!--                        </div>-->
 
                         <div class="my-4">
                             <div class="float-end"> <!--오른쪽 끝에 정렬함-->
-                                <button type="button" class="btn btn-primary listBtn">목록화면</button>
-                                <button type="button" class="btn btn-secondary modBtn">수정</button>
-                                <button type="button" class="btn btn-danger removeBtn">제거</button>
+                                <button type="button" class="btn btn-primary listBtn">목 록</button>
+                                <button type="button" class="btn btn-secondary modBtn">수 정</button>
+                                <button type="button" class="btn btn-danger removeBtn">제 거</button>
                             </div>
 
 

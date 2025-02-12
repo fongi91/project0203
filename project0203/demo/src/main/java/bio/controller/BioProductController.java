@@ -6,6 +6,7 @@ import bio.dto.BioProductPageResponseDTO;
 import bio.service.BioProductService;
 import lombok.extern.log4j.Log4j2;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,8 +48,14 @@ public class BioProductController {
             return "redirect:/bio/bioProductRegister";
         }
         log.info(bioProductDTO);
-        Long bioNo = bioProductService.register(bioProductDTO);
-        redirectAttributes.addFlashAttribute("result", bioNo);
+        try {
+            Long bioNo = bioProductService.register(bioProductDTO);
+            redirectAttributes.addFlashAttribute("result", bioNo);
+        } catch(DataIntegrityViolationException e){
+            log.error("중복 제품코드", e);
+            redirectAttributes.addFlashAttribute("errorMessage", "중복된 제품코드는 사용할 수 없습니다.");
+            return "redirect:/bio/bioProductRegister";
+        }
         return "redirect:/bio/bioProductList";
     }
 

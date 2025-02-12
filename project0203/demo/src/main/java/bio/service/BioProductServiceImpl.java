@@ -44,7 +44,7 @@ public class BioProductServiceImpl implements BioProductService {
     public void modify(BioProductDTO bioProductDTO){
         Optional<BioProduct> result = bioProductRepository.findById(bioProductDTO.getBioNo());
         BioProduct bioProduct = result.orElseThrow();
-        bioProduct.change(bioProductDTO.getEfficacyGroup(), bioProductDTO.getProductionType());
+        bioProduct.change(bioProductDTO.getProductName(), bioProductDTO.getCurrentCategory(), bioProductDTO.getPackagingUnit(), bioProductDTO.getEfficacyGroup(), bioProductDTO.getProductionType(), bioProductDTO.getDescription());
         bioProductRepository.save(bioProduct);
     }
 

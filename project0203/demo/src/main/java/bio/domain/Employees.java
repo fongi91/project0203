@@ -35,6 +35,7 @@ public class Employees extends EmployeesEntity{
     @Column(length = 50, nullable = false)
     private String registeredby;
 
+
     private EmployeeRole role;
 
     public void change(String employeeid,String employeename, String password, LocalDate hiredate, LocalDate terminationdate, String department, String position, String contactnumber){

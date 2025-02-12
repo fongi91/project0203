@@ -27,14 +27,13 @@
 
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text">포장단위</span>
-                        <input type="text" class="form-control" th:value="${dto.packagingUnit}" readonly>
-                    </div>
-
-
-                    <div class="input-group mb-3">
                         <span class="input-group-text">카테고리</span>
                         <input type="text" class="form-control" th:value="${dto.currentCategory}" readonly>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">포장단위</span>
+                        <input type="text" class="form-control" th:value="${dto.packagingUnit}" readonly>
                     </div>
 
                     <div class="input-group mb-3">
@@ -71,11 +70,11 @@
                     <div class="my-4">
                         <div class="float-end" th:with="link = ${bioProductPageRequestDTO.getLink()}">
                             <a th:href="|@{/bio/bioProductList}?${link}|" class="text-decoration-none">
-                                <button type="button" class="btn btn-primary">List</button>
+                                <button type="button" class="btn btn-secondary">목 록</button>
                             </a>
                             <a th:href="|@{/bio/bioProductModify}?bioNo=${dto.bioNo}&${link}|" class="text-decoration-none">
                             <!--<a th:href="|@{/board/modify(bno=${dto.bno})}&${link}|" class="text-decoration-none"> -->
-                                <button type="button" class="btn btn-secondary">Modify</button>
+                                <button type="button" class="btn btn-primary">수 정</button>
                             </a>
                         </div>
                     </div>
@@ -92,4 +91,9 @@
         e.stopPropagation();
         window.location.href = `/bio/bioProductList`;
     });
+            //modify 후 alert
+        const result = [[${result}]]
+        if(result){
+          alert("작업이 완료되었습니다.");
+        }
 </script>
