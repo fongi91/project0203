@@ -5,20 +5,17 @@
 <div layout:fragment="content">
     <div class="row mt-3">
         <form action="/bio/Employeeslist" method="get">
-            <div>
-                <h2>사원관리</h2>
-            </div>
             <div class="col">
                 <input type="hidden" name="size" th:value="${employeesPageRequestDTO.size}">
                 <div class="input-group">
                     <div class="input-group-perpend">
                         <select class="form-select" name="type">
-                            <option value="indpc" th:selected="${employeesPageRequestDTO.type == 'indpc'}">전 체</option>
-                            <option value="i" th:selected="${employeesPageRequestDTO.type == 'i'}">사원 번호</option>
-                            <option value="n" th:selected="${employeesPageRequestDTO.type == 'n'}">이 름</option>
-                            <option value="d" th:selected="${employeesPageRequestDTO.type == 'd'}">부 서</option>
-                            <option value="p" th:selected="${employeesPageRequestDTO.type == 'p'}">직 책</option>
-                            <option value="c" th:selected="${employeesPageRequestDTO.type == 'c'}">번 호</option>
+                            <option value="indpc" th:selected="${employeesPageRequestDTO.type == 'indpc'}">전체</option>
+                            <option value="i" th:selected="${employeesPageRequestDTO.type == 'i'}">사원번호</option>
+                            <option value="n" th:selected="${employeesPageRequestDTO.type == 'n'}">이름</option>
+                            <option value="d" th:selected="${employeesPageRequestDTO.type == 'd'}">부서</option>
+                            <option value="p" th:selected="${employeesPageRequestDTO.type == 'p'}">직책</option>
+                            <option value="c" th:selected="${employeesPageRequestDTO.type == 'c'}">번호</option>
                         </select>
                     </div>
                     <input type="text" class="form-control" name="keyword" th:value="${employeesPageRequestDTO.keyword}">
@@ -34,19 +31,20 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    Employees
+                    <h2>사원관리</h2>
                 </div>
                 <div class="card-body">
 
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col" style="text-align:center;">사원 번호</th>
-                            <th scope="col" style="text-align:center;">이 름</th>
-                            <th scope="col" style="text-align:center;">입사 날짜</th>
-                            <th scope="col" style="text-align:center;">부 서</th>
-                            <th scope="col" style="text-align:center;">직 책</th>
-                            <th scope="col" style="text-align:center;">번 호</th>
+                            <th scope="col" style="text-align:center;">사원번호</th>
+                            <th scope="col" style="text-align:center;">이름</th>
+                            <th scope="col" style="text-align:center;">입사일자</th>
+                            <th scope="col" style="text-align:center;">퇴사일자</th>
+                            <th scope="col" style="text-align:center;">부서</th>
+                            <th scope="col" style="text-align:center;">직책</th>
+                            <th scope="col" style="text-align:center;">번호</th>
                         </tr>
                         </thead>
                         <tbody th:with="link = ${employeesPageRequestDTO.getLink()}">
@@ -54,6 +52,7 @@
                             <td style="text-align:center;"><a th:href="|@{/bio/Employeesread(eno =${dto.eno})}&${link}|">[[${dto.employeeid}]]</a></td>
                             <td style="text-align:center;">[[${dto.employeename}]]</td>
                             <td style="text-align:center;">[[${#temporals.format(dto.hiredate, 'yyyy-MM-dd')}]]</td>
+                            <td style="text-align:center;">[[${#temporals.format(dto.terminationdate, 'yyyy-MM-dd')}]]</td>
                             <td style="text-align:center;">[[${dto.department}]]</td>
                             <td style="text-align:center;">[[${dto.position}]]</td>
                             <td style="text-align:center;">[[${dto.contactnumber}]]</td>

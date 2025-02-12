@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -32,6 +33,8 @@ public class EmployeesDTO {
     private String contactnumber;
 
     private String registeredby;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate registereddate;
 
-    private LocalDateTime registereddate;
+//    private Long role;
 }

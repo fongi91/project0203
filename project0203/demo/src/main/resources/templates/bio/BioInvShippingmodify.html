@@ -11,7 +11,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <p><b>수 정</b></p>
+                    <h2>출고관리</h2>
                 </div>
                 <div class="card-body">
                     <form th:action="@{/bio/BioInvShippingmodify}" method="post" id="f1">
@@ -21,19 +21,43 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">제품코드</span>
-                            <input type="text" class="form-control" th:value="${dto.productCode}" name="productCode">
+                            <select id="productCode" name="productCode" class="form-select" onchange="updateProductName()">
+                                <option value="B0001" th:selected="${dto.productCode == 'B0001'}">B0001</option>
+                                <option value="B0002" th:selected="${dto.productCode == 'B0002'}">B0002</option>
+                                <option value="B0003" th:selected="${dto.productCode == 'B0003'}">B0003</option>
+                                <option value="B0004" th:selected="${dto.productCode == 'B0004'}">B0004</option>
+                                <option value="B0005" th:selected="${dto.productCode == 'B0005'}">B0005</option>
+                                <option value="B0006" th:selected="${dto.productCode == 'B0006'}">B0006</option>
+                                <option value="B0007" th:selected="${dto.productCode == 'B0007'}">B0007</option>
+                                <option value="B0008" th:selected="${dto.productCode == 'B0008'}">B0008</option>
+                                <option value="B0009" th:selected="${dto.productCode == 'B0009'}">B0009</option>
+                                <option value="B00010" th:selected="${dto.productCode == 'B00010'}">B00010</option>
+                            </select>
                         </div>
+                        <input type="hidden" id="productName" name="productName">
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">출고수량</span>
                             <input type="text" class="form-control" th:value="${dto.quantity}" name="quantity">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">납품업체</span>
-                            <input type="text" class="form-control" th:value="${dto.customer}" name="customer">
+                            <select name="customer" class="form-select">
+                                <option value="포장팩 Co" th:selected="${dto.customer == '포장팩 Co'}">포장팩 Co</option>
+                                <option value="글로벌 물류" th:selected="${dto.customer == '글로벌 물류'}">글로벌 물류</option>
+                                <option value="헬스팩" th:selected="${dto.customer == '헬스팩'}">헬스팩</option>
+                                <option value="헬스프로덕트" th:selected="${dto.customer == '헬스프로덕트'}">헬스프로덕트</option>
+                                <option value="메디코시스템" th:selected="${dto.customer == '메디코시스템'}">메디코시스템</option>
+                            </select>
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">창고위치</span>
-                            <input type="text" class="form-control" th:value="${dto.warehouseLocation}" name="warehouseLocation">
+                            <select name="warehouseLocation" class="form-select">
+                                <option value="서울 물류센터" th:selected="${dto.warehouseLocation == '서울 물류센터'}">서울 물류센터</option>
+                                <option value="부산 물류센터" th:selected="${dto.warehouseLocation == '부산 물류센터'}">부산 물류센터</option>
+                                <option value="상하이 물류센터" th:selected="${dto.warehouseLocation == '상하이 물류센터'}">상하이 물류센터</option>
+                                <option value="시드니 물류센터" th:selected="${dto.warehouseLocation == '시드니 물류센터'}">시드니 물류센터</option>
+                                <option value="도쿄 물류센터" th:selected="${dto.warehouseLocation == '도쿄 물류센터'}">도쿄 물류센터</option>
+                            </select>
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">출고일자</span>
@@ -54,7 +78,7 @@
 
                         <div class="my-4">
                             <div class="float-end">
-                                <button type="button" class="btn btn-primary listBtn">List</button>
+                                <button type="button" class="btn btn-primary listBtn">목 록</button>
                                 <button type="button" class="btn btn-secondary modBtn">수 정</button>
                                 <button type="button" class="btn btn-danger removeBtn">삭 제</button>
                             </div>
@@ -112,4 +136,23 @@
         formObj.method = 'post'
         formObj.submit()
     },false)
+
+    //productCode 선택시 productName 선택
+    function updateProductName() {
+        const productCode = document.getElementById('productCode').value;
+        const productNames = {
+            "B0001": "람시마",
+            "B0002": "하쥬마",
+            "B0003": "람시마A",
+            "B0004": "우플라이마",
+            "B0005": "바그젤마",
+            "B0006": "우센벨트",
+            "B0007": "아이덴젤트",
+            "B0008": "스테키마",
+            "B0009": "휴면테스트",
+            "B00010": "테스트제품"
+        };
+
+        document.getElementById('productName').value = productNames[productCode] || '';
+    }
 </script>

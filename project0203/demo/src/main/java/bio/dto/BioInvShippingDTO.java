@@ -18,6 +18,8 @@ public class BioInvShippingDTO {
     private Long shippingId;
     @NotEmpty
     private String productCode;
+
+    private String productName;
     @NotNull
     private Long quantity;
     @NotEmpty

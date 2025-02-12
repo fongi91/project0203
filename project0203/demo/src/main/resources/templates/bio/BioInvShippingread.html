@@ -11,7 +11,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <p><b>조 회</b></p>
+                    <h2>출고관리</h2>
                 </div>
                 <div class="card-body">
                     <div class="input-group mb-3">
@@ -49,7 +49,7 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text" style="width:100px; justify-content: center;">출고완료</span>
                         <input type="text" class="form-control"
-                               th:value="${dto.isShipped ? 'Y' : 'N'}" readonly>
+                               th:value="${dto.isShipped ? '출고완료' : '출고대기'}" readonly>
                     </div>
 
                     <div class="my-4">
@@ -58,7 +58,7 @@
                                 <button type="button" class="btn btn-primary">수 정</button>
                             </a>
                             <a th:href="|@{/bio/BioInvShippinglist}?${link}|" class="text-decoration-none">
-                                <button type="button" class="btn btn-secondary">List</button>
+                                <button type="button" class="btn btn-secondary">목 록</button>
                             </a>
                         </div>
                     </div>

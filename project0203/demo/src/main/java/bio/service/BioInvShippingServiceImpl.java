@@ -45,7 +45,7 @@ public class BioInvShippingServiceImpl implements BioInvShippingService{
     public void modify(BioInvShippingDTO bioInvShippingDTO){
         Optional<BioInvShipping> result = bioInvShippingRepository.findById(bioInvShippingDTO.getShippingId());
         BioInvShipping bioInvShipping = result.orElseThrow();
-        bioInvShipping.change(bioInvShippingDTO.getProductCode(), bioInvShippingDTO.getQuantity(), bioInvShippingDTO.getCustomer(),bioInvShippingDTO.getWarehouseLocation(), bioInvShippingDTO.getShippingDate(),bioInvShippingDTO.getRegisteredBy(), bioInvShippingDTO.getIsShipped());
+        bioInvShipping.change(bioInvShippingDTO.getProductCode(),bioInvShippingDTO.getProductName(), bioInvShippingDTO.getQuantity(), bioInvShippingDTO.getCustomer(),bioInvShippingDTO.getWarehouseLocation(), bioInvShippingDTO.getShippingDate(),bioInvShippingDTO.getRegisteredBy(), bioInvShippingDTO.getIsShipped());
         bioInvShippingRepository.save(bioInvShipping);
     }
 

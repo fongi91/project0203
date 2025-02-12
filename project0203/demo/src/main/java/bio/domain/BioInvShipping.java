@@ -17,6 +17,8 @@ public class BioInvShipping extends BioInvShippingEntity{
     private Long shippingId;
     @Column(length = 255, nullable = false)
     private String productCode;
+    @Column(length = 255, nullable = false)
+    private String productName;
     @Column(length = 11, nullable = false)
     private Long quantity;
     @Column(length = 255, nullable = false)
@@ -30,8 +32,9 @@ public class BioInvShipping extends BioInvShippingEntity{
     @Column(nullable = false)
     private Boolean isShipped;
 
-    public void change(String productCode, Long quantity, String customer, String warehouseLocation, LocalDate shippingDate, String registeredBy, Boolean isShipped){
+    public void change(String productCode, String productName, Long quantity, String customer, String warehouseLocation, LocalDate shippingDate, String registeredBy, Boolean isShipped){
         this.productCode = productCode;
+        this.productName = productName;
         this.quantity = quantity;
         this.customer = customer;
         this.warehouseLocation = warehouseLocation;
