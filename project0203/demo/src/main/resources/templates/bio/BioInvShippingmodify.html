@@ -137,6 +137,7 @@
     },false)
 
     //productCode 선택시 productName 선택
+    // productCode 선택 시 productName 자동 설정
     function updateProductName() {
         const productCode = document.getElementById('productCode').value;
         const productNames = {
@@ -148,10 +149,15 @@
             "B0006": "우센벨트",
             "B0007": "아이덴젤트",
             "B0008": "스테키마",
-            "B0009": "휴면테스트",
-            "B00010": "테스트제품"
+            "B0009": "휴먼약"
         };
 
         document.getElementById('productName').value = productNames[productCode] || '';
     }
+
+    // 페이지 로드 시 자동 실행
+    document.addEventListener("DOMContentLoaded", function() {
+        updateProductName();
+    });
+
 </script>
