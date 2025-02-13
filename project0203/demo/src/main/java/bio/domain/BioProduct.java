@@ -3,6 +3,7 @@ package bio.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @NoArgsConstructor
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @Builder
-public class BioProduct extends BioProductEntity {
+public class BioProduct extends BioProductEntity implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bioNo;

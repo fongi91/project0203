@@ -5,20 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="590c5216-4d2c-49cc-a10f-25392c1da9cf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/controller/BioProductInventoryVController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/domain/BioProductInventoryV.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/dto/BioProductInventoryVDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/dto/BioProductInventoryVPageRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/dto/BioProductInventoryVPageResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/repository/BioProductInventoryVRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/repository/search/BioProductInventoryVSearch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/repository/search/BioProductInventoryVSearchImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/service/BioProductInventoryVService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/service/BioProductInventoryVServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/bioProductInventoryVList.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/controller/BioProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/controller/BioProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/domain/BioProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/domain/BioProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/domain/Employees.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/domain/Employees.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/dto/BioProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/dto/BioProductDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/dto/EmployeesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/dto/EmployeesDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/service/BioProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/service/BioProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/service/BioProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/service/BioProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/Employeesregister.html" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/Employeesregister.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/bioProductList.html" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/bioProductList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/bioProductModify.html" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/bioProductModify.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/bioProductRead.html" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/bioProductRead.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/bioProductRegister.html" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/bioProductRegister.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/BioInvReceivinglist.html" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/BioInvReceivinglist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/BioInvShippinglist.html" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/BioInvShippinglist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/basic.html" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/basic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project0203/demo/src/test/java/bio/service/BioServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/test/java/bio/service/BioServiceTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +52,14 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -60,17 +73,28 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.BioServiceTests.testList.executor": "Run",
     "Gradle.demo [:B01Application.main()].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/project0203",
+    "last_opened_file_path": "D:/project0203/project0203/demo/src/main/resources/templates/bio",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\project0203\project0203\demo\src\main\resources\templates\bio" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="bio.service" />
+      <recent name="bio.repository.search" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.B01Application">
     <configuration name="B01Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="bio.B01Application" />
       <module name="demo.main" />
@@ -84,8 +108,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BioServiceTests.testList" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/project0203/demo" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;bio.service.BioServiceTests.testList&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.BioServiceTests.testList" />
         <item itemvalue="Application.B01Application" />
       </list>
     </recent_temporary>
@@ -111,5 +160,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/project0203/demo/src/main/java/bio/dto/BioProductInventoryVPageResponseDTO.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
