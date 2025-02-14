@@ -35,7 +35,6 @@ public class LoginServiceImpl implements LoginService{
             return null;
         }
 
-        // 추가
         // 세션에 사용자 정보 저장
         session.setAttribute("employees", employees);
 
@@ -46,18 +45,4 @@ public class LoginServiceImpl implements LoginService{
     public void logout(HttpSession session) {
         session.invalidate(); // 세션 삭제
     }
-
-//    @Override
-//    public User getLoginUserById(Long eno) {
-//        // eno가 없으면(로그아웃 상태 혹은 eno를 찾지 못한 경우) null return
-//        if(eno == null) return null;
-//
-//        Optional<User> optionalUser = userRepository.findById(eno);
-//
-//        if(optionalUser.isEmpty()) return null;
-//
-//        // eno로 가져온 User가 존재하면 User return
-//        return optionalUser.get();
-//    }
-
 }
