@@ -11,5 +11,5 @@ public class LoginDTO {
 
     private String employeeid;
     private String password;
-
+    private boolean rememberId;
 }
