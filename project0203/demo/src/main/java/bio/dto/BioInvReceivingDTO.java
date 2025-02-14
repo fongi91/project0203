@@ -27,6 +27,9 @@ public class BioInvReceivingDTO {
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate receivingDate;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate shelfLife;
     @NotEmpty
     private String registeredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
