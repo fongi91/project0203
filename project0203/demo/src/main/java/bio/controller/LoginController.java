@@ -7,12 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import bio.domain.EmployeeRole;
 import bio.dto.LoginDTO;
 import bio.domain.Employees;
 import bio.service.LoginService;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
@@ -33,18 +34,13 @@ public class LoginController {
         Employees employees = (Employees) session.getAttribute("employees");
 
         if (employees != null) {
-            log.info("대시보드 접근 - 직원 정보: " + employees);
-            log.info("대시보드 접근 - 직원 Role: " + employees.getRole());
-
             model.addAttribute("employee", employees);
             model.addAttribute("employeeName", employees.getEmployeename());
-//            model.addAttribute("isAdmin", employees.getRole().equals(EmployeeRole.ADMIN));  // 관리자 여부 추가
-//            model.addAttribute("isHr", employees.getRole().equals(EmployeeRole.HR));        // 인사팀
-//            model.addAttribute("isLogistics", employees.getRole().equals(EmployeeRole.LOGISTICS));  // 물류팀
             List<Object[]> efficacyGroupData = bioProductService.getEfficacyGroupDistribution();
             model.addAttribute("efficacyGroupData", efficacyGroupData);  // 모델에 데이터 담기
 
             log.info("Employee in session: " + employees);
+            log.info("EmployeeRole in session: " + employees.getRole());
 
             return "bio/dashboard"; // 대시보드 페이지로 이동
         } else {
@@ -54,8 +50,18 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String loginPage(Model model) {
-        model.addAttribute("loginDTO", new LoginDTO());
+    public String loginPage(Model model,
+                            @CookieValue(value = "rememberEmployeeid", required = false) String savedId) {
+        LoginDTO loginDTO = new LoginDTO();
+
+        // 아이디 기억하기 기능
+        // 쿠키 값이 있으면
+        if(savedId != null) {
+            loginDTO.setEmployeeid(savedId);    // savedId에 저장
+            loginDTO.setRememberId(true);
+        }
+        model.addAttribute("loginDTO", loginDTO);
+
         return "bio/login";
     }
 
@@ -69,7 +75,8 @@ public class LoginController {
                         HttpSession session,
                         Model model,
                         BindingResult bindingResult,
-                        HttpServletRequest httpServletRequest) {
+                        HttpServletRequest httpServletRequest,
+                        HttpServletResponse httpServletResponse) {
         Employees employees = loginService.login(loginDTO, session);
 
         log.info("login employees: " + employees);
@@ -97,11 +104,26 @@ public class LoginController {
 
         sessionList.put(newSession.getId(), newSession);
 
-        log.info("로그인 성공 - 세션 저장됨: " + newSession.getAttribute("employees"));
-        log.info("로그인 성공 - 직원 Role: " + employees.getRole());
+        log.info("login success - session employees: " + newSession.getAttribute("employees"));
+        log.info("login success - employee Role: " + employees.getRole());
+
+        // 아이디 기억하기 기능
+        // 쿠키 생성
+        Cookie idCookie = new Cookie("rememberEmployeeid", loginDTO.getEmployeeid());
+        idCookie.setPath("/");
+
+        if(loginDTO.isRememberId()) {
+            idCookie.setMaxAge(60*60*24*7); // 7일간 유지
+        } else {
+            idCookie.setMaxAge(0);
+        }
+
+        // 응답에 쿠키 추가
+        httpServletResponse.addCookie(idCookie);
+
+        log.info("cookie:" + idCookie);
+
         return "redirect:/bio/dashboard";
-
-
     }
 
     @GetMapping("/logout")
