@@ -31,15 +31,17 @@
                                         <input type="password" th:field="*{password}" class="form-control"
                                                id="exampleInputPassword1" placeholder="비밀번호를 입력하세요">
                                     </div>
-<!--                                    <div class="form-group form-check">-->
-<!--                                        <input type="checkbox" class="form-check-input" id="rememberMe" th:checked="{cookie.savedUserId != null}">-->
-<!--                                        <label class="form-check-label" for="rememberMe">아이디 저장</label>-->
-<!--                                    </div>-->
+                                    <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" id="rememberId"
+                                                   th:field="*{rememberId}"/>
+                                            <label class="form-check-label" for="rememberId">아이디 저장</label>
+                                    </div>
+
                                     <div th:if="${error}" class="text-danger">
                                         <p th:text="${error}"></p>
                                     </div>
                                     <div style="text-align: right;">
-                                        <button type="submit" class="btn btn-primary">로그인</button>
+                                        <button id="loginBtn" type="submit" class="btn btn-primary">로그인</button>
                                     </div>
                                 </form>
                             </div>
