@@ -31,6 +31,6 @@ public class BioInvReceivingDTO {
     private String registeredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registeredDate;
-
     private Boolean isReceived;
+    private String productName;
 }
