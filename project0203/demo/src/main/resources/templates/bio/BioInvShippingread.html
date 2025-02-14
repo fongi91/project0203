@@ -23,8 +23,16 @@
                         <input type="text" class="form-control" th:value="${dto.productCode}" readonly>
                     </div>
                     <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">제품명</span>
+                        <input type="text" class="form-control" th:value="${dto.productName}" id="productName" name="productName" readonly>
+                    </div>
+                    <div class="input-group mb-3">
                         <span class="input-group-text" style="width:100px; justify-content: center;">출고수량</span>
                         <input type="text" class="form-control" th:value="${dto.quantity}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">유통기한</span>
+                        <input type="text" class="form-control" th:value="${dto.shelfLife}" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" style="width:100px; justify-content: center;">납품업체</span>

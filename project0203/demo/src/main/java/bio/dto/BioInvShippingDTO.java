@@ -19,7 +19,6 @@ public class BioInvShippingDTO {
     @NotEmpty
     private String productCode;
 
-    private String productName;
     @NotNull
     private Long quantity;
     @NotEmpty
@@ -35,4 +34,7 @@ public class BioInvShippingDTO {
     private LocalDate registeredDate;
 
     private Boolean isShipped;
+    private String productName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate shelfLife;
 }

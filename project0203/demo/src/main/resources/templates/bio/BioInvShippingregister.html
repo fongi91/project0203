@@ -30,10 +30,14 @@
                                 <option value="B0009">B0009 - 휴먼약</option>
                             </select>
                         </div>
-                        <input type="hidden" id="productName" name="productName">
+
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">출고수량</span>
                             <input type="text" name="quantity" class="form-control" placeholder="수량을 입력해주세요.">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">유통기한</span>
+                            <input type="date" name="shelfLife" class="form-control" placeholder="유통기한을 입력해주세요.">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">납품업체</span>
@@ -108,22 +112,4 @@
         // 출고일자(input[type="date"]) 필드에 기본값 설정
         document.querySelector('input[name="shippingDate"]').value = formattedToday;
     });
-    //productCode 선택시 productName 선택
-    function updateProductName() {
-        const productCode = document.getElementById('productCode').value;
-        const productNames = {
-            "B0001": "람시마",
-            "B0002": "하쥬마",
-            "B0003": "람시마A",
-            "B0004": "우플라이마",
-            "B0005": "바그젤마",
-            "B0006": "우센벨트",
-            "B0007": "아이덴젤트",
-            "B0008": "스테키마",
-            "B0009": "휴면테스트",
-            "B00010": "테스트제품"
-        };
-
-        document.getElementById('productName').value = productNames[productCode] || '';
-    }
 </script>

@@ -17,8 +17,6 @@ public class BioInvShipping extends BioInvShippingEntity{
     private Long shippingId;
     @Column(length = 255, nullable = false)
     private String productCode;
-    @Column(length = 255, nullable = false)
-    private String productName;
     @Column(length = 11, nullable = false)
     private Long quantity;
     @Column(length = 255, nullable = false)
@@ -27,20 +25,32 @@ public class BioInvShipping extends BioInvShippingEntity{
     private String warehouseLocation;
     @Column(nullable = false)
     private LocalDate shippingDate;
+    @Column(nullable = false)
+    private LocalDate shelfLife;
     @Column(length = 255, nullable = false)
     private String registeredBy;
     @Column(nullable = false)
     private Boolean isShipped;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "productCode", referencedColumnName = "productCode", insertable = false, updatable = false)
+    private BioProduct bioProduct;
 
-    public void change(String productCode, String productName, Long quantity, String customer, String warehouseLocation, LocalDate shippingDate, String registeredBy, Boolean isShipped){
+    @Transient
+    public String getProductName() {
+        return bioProduct != null ? bioProduct.getProductName() : null;
+    }
+
+    public void change(String productCode, Long quantity, String customer, String warehouseLocation, LocalDate shippingDate, LocalDate shelfLife,String registeredBy, Boolean isShipped){
         this.productCode = productCode;
-        this.productName = productName;
         this.quantity = quantity;
         this.customer = customer;
         this.warehouseLocation = warehouseLocation;
         this.shippingDate = shippingDate;
         this.registeredBy = registeredBy;
         this.isShipped = isShipped;
+        this.shelfLife = shelfLife;
     }
 
+    public void setProductCode(String productCode) {this.productCode = productCode;}
+    public void setBioProduct(BioProduct bioProduct) {}
 }

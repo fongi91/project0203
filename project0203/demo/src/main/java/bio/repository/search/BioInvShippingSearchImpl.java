@@ -37,7 +37,6 @@ public class BioInvShippingSearchImpl implements BioInvShippingSearch {
             for (String type : types) {
                 switch (type) {
                     case "p": typeConditions.add("b.productCode LIKE :keyword"); break;
-                    case "n": typeConditions.add("b.productName LIKE :keyword"); break;
                     case "q": typeConditions.add("CAST(b.quantity AS string) LIKE :keyword"); break;
                     case "c": typeConditions.add("b.customer LIKE :keyword"); break;
                     case "l": typeConditions.add("b.warehouseLocation LIKE :keyword"); break;

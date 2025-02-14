@@ -10,9 +10,8 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <select class="form-select" name="type" id="searchType">
-                            <option value="pnqclr" th:selected="${bioInvShippingPageRequestDTO.type == 'pnqclr'}">전 체</option>
+                            <option value="pqclr" th:selected="${bioInvShippingPageRequestDTO.type == 'pqclr'}">전 체</option>
                             <option value="p" th:selected="${bioInvShippingPageRequestDTO.type == 'p'}">제품코드</option>
-                            <option value="n" th:selected="${bioInvShippingPageRequestDTO.type == 'n'}">제품이름</option>
                             <option value="q" th:selected="${bioInvShippingPageRequestDTO.type == 'q'}">출고수량</option>
                             <option value="c" th:selected="${bioInvShippingPageRequestDTO.type == 'c'}">납품업체</option>
                             <option value="l" th:selected="${bioInvShippingPageRequestDTO.type == 'l'}">창고위치</option>
@@ -51,13 +50,13 @@
                         <tr>
                             <th scope="col", style="text-align:center;">출고번호</th>
                             <th scope="col", style="text-align:center;">제품코드</th>
-                            <th scope="col", style="text-align:center;">제품이름</th>
+                            <th scope="col", style="text-align:center;">제품명</th>
                             <th scope="col", style="text-align:center;">출고수량</th>
+                            <th scope="col", style="text-align:center;">유통기한</th>
                             <th scope="col", style="text-align:center;">납품업체</th>
                             <th scope="col", style="text-align:center;">창고위치</th>
                             <th scope="col", style="text-align:center;">출고일자</th>
                             <th scope="col", style="text-align:center;">등록자</th>
-                            <th scope="col", style="text-align:center;">등록일자</th>
                             <th scope="col", style="text-align:center;">출고완료</th>
                         </tr>
                         </thead>
@@ -67,11 +66,11 @@
                             <td style="text-align:center;">[[${dto.productCode}]]</td>
                             <td style="text-align:center;">[[${dto.productName}]]</td>
                             <td style="text-align:center;">[[${dto.quantity}]]</td>
+                            <td style="text-align:center;">[[${dto.shelfLife}]]</td>
                             <td style="text-align:center;">[[${dto.customer}]]</td>
                             <td style="text-align:center;">[[${dto.warehouseLocation}]]</td>
                             <td style="text-align:center;">[[${dto.shippingDate}]]</td>
                             <td style="text-align:center;">[[${dto.registeredBy}]]</td>
-                            <td style="text-align:center;">[[${dto.registeredDate}]]</td>
                             <td style="text-align:center;" th:text="${dto.isShipped} ? '출고완료' : '출고대기'"></td>
                         </tr>
                         </tbody>
