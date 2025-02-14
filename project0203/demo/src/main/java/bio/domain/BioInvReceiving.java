@@ -26,6 +26,8 @@ public class BioInvReceiving extends BioInvReceivingEntity {
     @Column(nullable = false)
     private LocalDate receivingDate;
     @Column(length = 255, nullable = false)
+    private LocalDate shelfLife;
+    @Column(length = 255, nullable = false)
     private String registeredBy;
     @Column(nullable = false)
     private Boolean isReceived;
