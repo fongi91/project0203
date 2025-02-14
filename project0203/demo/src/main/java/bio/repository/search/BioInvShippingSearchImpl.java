@@ -22,16 +22,17 @@ public class BioInvShippingSearchImpl implements BioInvShippingSearch {
     private final EntityManager entityManager;
 
     @Override
-    public Page<BioInvShipping> searchAll(String[] types, String keyword, String dateKeyword, Pageable pageable) {
+    public Page<BioInvShipping> searchAll(String[] types, String keyword, String dateKeyword, String shelfLifeKeyword, Pageable pageable) {
         String baseQuery = "SELECT b FROM BioInvShipping b WHERE b.shippingId > 0";
         String countQueryBase = "SELECT COUNT(b) FROM BioInvShipping b WHERE b.shippingId > 0";
 
         List<String> conditions = new ArrayList<>();
         boolean hasKeyword = keyword != null && !keyword.isEmpty();
         boolean hasDateKeyword = dateKeyword != null && !dateKeyword.isEmpty();
+        boolean hasShelfLifeKeyword = shelfLifeKeyword != null && !shelfLifeKeyword.isEmpty();
         boolean hasTypes = types != null && types.length > 0;
 
-        //  검색 타입이 있을 경우 해당 필드 검색
+        // 일반 검색 (제품코드, 출고수량 등)
         if (hasKeyword && hasTypes) {
             List<String> typeConditions = new ArrayList<>();
             for (String type : types) {
@@ -48,21 +49,26 @@ public class BioInvShippingSearchImpl implements BioInvShippingSearch {
             }
         }
 
-        //  출고일자 검색 조건 추가
+        // 출고일자 검색
         if (hasDateKeyword) {
             conditions.add("b.shippingDate = :shippingDate");
         }
 
-        //  WHERE 조건을 동적으로 추가
+        // 유통기한 검색
+        if (hasShelfLifeKeyword) {
+            conditions.add("b.shelfLife = :shelfLifeDate");
+        }
+
+        // WHERE 조건을 동적으로 추가
         String conditionString = conditions.isEmpty() ? "" : " AND " + String.join(" AND ", conditions);
         String finalQuery = baseQuery + conditionString + " ORDER BY b.shippingId DESC";
         String countQueryFinal = countQueryBase + conditionString;
 
-        //  JPQL 쿼리 실행
+        // JPQL 쿼리 실행
         TypedQuery<BioInvShipping> query = entityManager.createQuery(finalQuery, BioInvShipping.class);
         TypedQuery<Long> countQuery = entityManager.createQuery(countQueryFinal, Long.class);
 
-        //  검색어 파라미터 설정 (존재할 때만)
+        // 파라미터 설정
         if (hasKeyword) {
             query.setParameter("keyword", "%" + keyword + "%");
             countQuery.setParameter("keyword", "%" + keyword + "%");
@@ -74,17 +80,24 @@ public class BioInvShippingSearchImpl implements BioInvShippingSearch {
             countQuery.setParameter("shippingDate", date);
         }
 
-        //  페이징 처리
+        if (hasShelfLifeKeyword) {
+            LocalDate shelfLifeDate = LocalDate.parse(shelfLifeKeyword);
+            query.setParameter("shelfLifeDate", shelfLifeDate);
+            countQuery.setParameter("shelfLifeDate", shelfLifeDate);
+        }
+
+        // 페이징 처리
         query.setFirstResult((int) pageable.getOffset());
         query.setMaxResults(pageable.getPageSize());
 
         List<BioInvShipping> list = query.getResultList();
         long count = countQuery.getSingleResult();
 
-        log.info("Keyword: [" + keyword + "]");
+        log.info("Keyword: [" + keyword + "], Date: [" + dateKeyword + "], ShelfLife: [" + shelfLifeKeyword + "]");
 
         return new PageImpl<>(list, pageable, count);
     }
+
 
 
 }

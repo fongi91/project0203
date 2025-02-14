@@ -87,9 +87,12 @@ public class BioInvShippingServiceImpl implements BioInvShippingService{
         String keyword = bioInvShippingPageRequestDTO.getKeyword();
 
         String dateKeyword = bioInvShippingPageRequestDTO.getDateKeyword();
+
+        String shelfLifeKeyword = bioInvShippingPageRequestDTO.getShelfLifeKeyword();
+
         Pageable pageable = bioInvShippingPageRequestDTO.getPageable("shippingId");
 
-        Page<BioInvShipping> result = bioInvShippingRepository.searchAll(types, keyword, dateKeyword, pageable);
+        Page<BioInvShipping> result = bioInvShippingRepository.searchAll(types, keyword, dateKeyword, shelfLifeKeyword, pageable);
 
         List<BioInvShippingDTO> dtoList = result.getContent().stream()
                 .map(bioInvShipping -> {BioInvShippingDTO dto = modelMapper.map(bioInvShipping, BioInvShippingDTO.class);

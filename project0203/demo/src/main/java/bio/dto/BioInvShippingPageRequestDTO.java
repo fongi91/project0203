@@ -26,6 +26,8 @@ public class BioInvShippingPageRequestDTO {
 
     private String dateKeyword;
 
+    private String shelfLifeKeyword;
+
     public String[] getTypes(){
         if (type == null || type.isEmpty()){
             return null;
