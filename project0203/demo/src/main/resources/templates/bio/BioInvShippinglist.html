@@ -10,8 +10,9 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <select class="form-select" name="type" id="searchType">
-                            <option value="pqclr" th:selected="${bioInvShippingPageRequestDTO.type == 'pqclr'}">전 체</option>
+                            <option value="pnqclr" th:selected="${bioInvShippingPageRequestDTO.type == 'pnqclr'}">전 체</option>
                             <option value="p" th:selected="${bioInvShippingPageRequestDTO.type == 'p'}">제품코드</option>
+                            <option value="n" th:selected="${bioInvShippingPageRequestDTO.type == 'n'}">제품이름</option>
                             <option value="q" th:selected="${bioInvShippingPageRequestDTO.type == 'q'}">출고수량</option>
                             <option value="c" th:selected="${bioInvShippingPageRequestDTO.type == 'c'}">납품업체</option>
                             <option value="l" th:selected="${bioInvShippingPageRequestDTO.type == 'l'}">창고위치</option>

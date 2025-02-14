@@ -3,6 +3,7 @@ package bio.repository.search;
 import bio.domain.BioInvShipping;
 import bio.domain.Employees;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class BioInvShippingSearchImpl implements BioInvShippingSearch {
     private final EntityManager entityManager;
 
@@ -35,6 +37,7 @@ public class BioInvShippingSearchImpl implements BioInvShippingSearch {
             for (String type : types) {
                 switch (type) {
                     case "p": typeConditions.add("b.productCode LIKE :keyword"); break;
+                    case "n": typeConditions.add("b.productName LIKE :keyword"); break;
                     case "q": typeConditions.add("CAST(b.quantity AS string) LIKE :keyword"); break;
                     case "c": typeConditions.add("b.customer LIKE :keyword"); break;
                     case "l": typeConditions.add("b.warehouseLocation LIKE :keyword"); break;
@@ -78,6 +81,8 @@ public class BioInvShippingSearchImpl implements BioInvShippingSearch {
 
         List<BioInvShipping> list = query.getResultList();
         long count = countQuery.getSingleResult();
+
+        log.info("Keyword: [" + keyword + "]");
 
         return new PageImpl<>(list, pageable, count);
     }
