@@ -56,11 +56,11 @@
                             <th scope="col", style="text-align:center;">제품코드</th>
                             <th scope="col", style="text-align:center;">제품명</th> <!-- 제품명 추가 -->
                             <th scope="col", style="text-align:center;">입고수량</th>
+                            <th scope="col", style="text-align:center;">유통기한</th>
                             <th scope="col", style="text-align:center;">공급업체</th>
                             <th scope="col", style="text-align:center;">창고위치</th>
                             <th scope="col", style="text-align:center;">입고일자</th>
                             <th scope="col", style="text-align:center;">등록자</th>
-                            <th scope="col", style="text-align:center;">등록일자</th>
                             <th scope="col", style="text-align:center;">입고완료</th>
                         </tr>
                         </thead>
@@ -70,11 +70,11 @@
                             <td style="text-align:center;">[[${dto.productCode}]]</td>
                             <td style="text-align:center;">[[${dto.productName}]]</td> <!-- 제품명 표시 -->
                             <td style="text-align:center;">[[${dto.quantity}]]</td>
+                            <td style="text-align:center;">[[${dto.shelfLife}]]</td> <!-- 유통기한 표시 -->
                             <td style="text-align:center;">[[${dto.supplier}]]</td>
                             <td style="text-align:center;">[[${dto.warehouseLocation}]]</td>
                             <td style="text-align:center;">[[${dto.receivingDate}]]</td>
                             <td style="text-align:center;">[[${dto.registeredBy}]]</td>
-                            <td style="text-align:center;">[[${dto.registeredDate}]]</td>
                             <td style="text-align:center;" th:text="${dto.isReceived} ? '입고완료' : '입고대기'"></td>
                         </tr>
                         </tbody>
