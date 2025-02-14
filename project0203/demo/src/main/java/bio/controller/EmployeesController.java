@@ -1,7 +1,5 @@
 package bio.controller;
 
-import bio.domain.EmployeeRole;
-import bio.domain.Employees;
 import bio.dto.EmployeesDTO;
 import bio.dto.EmployeesPageRequestDTO;
 import bio.dto.EmployeesPageResponseDTO;
@@ -33,12 +31,11 @@ public class EmployeesController {
     }
 
     @GetMapping("/Employeesregister")
-    public void registerGET(@ModelAttribute("employee") Employees employee){
+    public void registerGET(){
 
     }
     @PostMapping("/Employeesregister")
-    public String registerPost(@ModelAttribute("employee") Employees employee,
-                               @Valid EmployeesDTO employeesDTO,
+    public String registerPost(@Valid EmployeesDTO employeesDTO,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
@@ -52,8 +49,7 @@ public class EmployeesController {
     }
 
     @GetMapping({"/Employeesread", "/Employeesmodify"})
-    public void read(@ModelAttribute("employee") Employees employee,
-                     Long eno,
+    public void read(Long eno,
                      EmployeesPageRequestDTO employeesPageRequestDTO,
                      Model model) {
         EmployeesDTO employeesDTO = employeesService.readOne(eno);
@@ -64,8 +60,7 @@ public class EmployeesController {
     }
 
     @PostMapping("/Employeesmodify")
-    public String modify(@ModelAttribute("employee") Employees employee,
-                         EmployeesPageRequestDTO employeesPageRequestDTO,
+    public String modify(EmployeesPageRequestDTO employeesPageRequestDTO,
                          @Valid EmployeesDTO employeesDTO,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes){
@@ -82,8 +77,7 @@ public class EmployeesController {
     }
 
     @PostMapping("/Employeesremove")
-    public String remove(@ModelAttribute("employee") Employees employee,
-                         Long eno,
+    public String remove(Long eno,
                          RedirectAttributes redirectAttributes){
         employeesService.remove(eno);
         redirectAttributes.addFlashAttribute("result", "removed");
