@@ -15,7 +15,7 @@ public class BioInvReceiving extends BioInvReceivingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long receivingId;
-    @Column(length = 255, nullable = false)
+    @Column
     private String productCode;
     @Column(length = 11, nullable = false)
     private Long quantity;
@@ -29,6 +29,14 @@ public class BioInvReceiving extends BioInvReceivingEntity {
     private String registeredBy;
     @Column(nullable = false)
     private Boolean isReceived;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "productCode", referencedColumnName = "productCode", insertable = false, updatable = false)
+    private BioProduct bioProduct;
+
+    @Transient
+    public String getProductName() {
+        return bioProduct != null ? bioProduct.getProductName() : null;
+    }
 
     public void change(String productCode, Long quantity, String supplier, String warehouseLocation, LocalDate receivingDate, String registeredBy, Boolean isReceived){
         this.productCode = productCode;
@@ -40,4 +48,6 @@ public class BioInvReceiving extends BioInvReceivingEntity {
         this.isReceived = isReceived;
     }
 
+    public void setProductCode(String productCode) {this.productCode = productCode;}
+    public void setBioProduct(BioProduct bioProduct) {}
 }
