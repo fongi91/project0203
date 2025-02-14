@@ -17,7 +17,7 @@
                     <form action="/bio/BioInvReceivingregister" method="post">
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">제품코드</span>
-                            <select name="productCode" class="form-select">
+                            <select id="productCode" name="productCode" class="form-select" onchange="updateProductName()">
                                 <option value="" disabled selected>제품코드를 선택해주세요</option>
                                 <option value="B0001">B0001</option>
                                 <option value="B0002">B0002</option>
@@ -29,7 +29,10 @@
                                 <option value="B0008">B0008</option>
                             </select>
                         </div>
-
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">제품명</span>
+                            <input type="text" name="productName" class="form-control" id="productName" readonly>
+                        </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">입고수량</span>
                             <input type="text" name="quantity" class="form-control" placeholder="수량을 입력해주세요.">
@@ -102,5 +105,24 @@
             errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
         }
         alert(errorMsg)
+    }
+
+        //productCode 선택시 productName 선택
+    function updateProductName() {
+        const productCode = document.getElementById('productCode').value;
+        const productNames = {
+            "B0001": "람시마",
+            "B0002": "하쥬마",
+            "B0003": "람시마A",
+            "B0004": "우플라이마",
+            "B0005": "바그젤마",
+            "B0006": "우센벨트",
+            "B0007": "아이덴젤트",
+            "B0008": "스테키마",
+            "B0009": "휴면테스트",
+            "B00010": "테스트제품"
+        };
+
+        document.getElementById('productName').value = productNames[productCode] || '';
     }
 </script>
