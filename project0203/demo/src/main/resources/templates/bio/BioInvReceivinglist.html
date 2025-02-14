@@ -54,6 +54,7 @@
                         <tr>
                             <th scope="col", style="text-align:center;">입고번호</th>
                             <th scope="col", style="text-align:center;">제품코드</th>
+                            <th scope="col", style="text-align:center;">제품명</th> <!-- 제품명 추가 -->
                             <th scope="col", style="text-align:center;">입고수량</th>
                             <th scope="col", style="text-align:center;">공급업체</th>
                             <th scope="col", style="text-align:center;">창고위치</th>
@@ -67,6 +68,7 @@
                         <tr th:each="dto:${responseDTO.dtoList}">
                             <td style="text-align:center;"><a th:href="|@{/bio/BioInvReceivingread(receivingId =${dto.receivingId})}&${link}|">[[${dto.receivingId}]]</a></td>
                             <td style="text-align:center;">[[${dto.productCode}]]</td>
+                            <td style="text-align:center;">[[${dto.productName}]]</td> <!-- 제품명 표시 -->
                             <td style="text-align:center;">[[${dto.quantity}]]</td>
                             <td style="text-align:center;">[[${dto.supplier}]]</td>
                             <td style="text-align:center;">[[${dto.warehouseLocation}]]</td>
