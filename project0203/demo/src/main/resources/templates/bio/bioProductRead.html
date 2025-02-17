@@ -14,7 +14,8 @@
                 </div>
 
                 <div class="card-body">
-                    <p th:text="${dto.description}" readonly></p>
+                    <div style="display: flex; align-items: center;"><img th:src="@{/img/{imageName}(imageName=${dto.imageFileName})}" alt="image" class="img-fluid"/>
+                    <p style="margin-left:10px; margin-bottom:0px;" th:text="${dto.description}" readonly></p></div>
                 </div>
 
                 <div class="card-body">

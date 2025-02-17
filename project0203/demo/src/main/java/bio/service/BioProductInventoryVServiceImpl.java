@@ -46,5 +46,9 @@ public class BioProductInventoryVServiceImpl implements BioProductInventoryVServ
                 .build();
 
     }
+    @Override
+    public List<Object[]> getBioProductInventoryVData() {
+        return bioProductInventoryVRepository.getBioProductInventoryVData();
+    }
 
 }

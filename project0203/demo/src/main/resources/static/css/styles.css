@@ -11111,3 +11111,14 @@ p {
     height: 50px;
     accent-color: #5A6C57;
 }
+
+
+
+.chartName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: right;
+    font-weight: bold;
+}
+

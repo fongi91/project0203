@@ -5,13 +5,13 @@
 
 
 <head>
-  <meta charset="UTF-8">
-  <title>Bio One Dashboard</title>
-  <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!--Core theme CSS (includes Bootstrap)-->
-  <link th:href="@{/css/styles.css}" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 로드 -->
+    <meta charset="UTF-8">
+    <title>Bio One Dashboard</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 로드 -->
 </head>
 
 <body>
@@ -54,55 +54,57 @@
                 </div>
             </div>
 
-      <div class="company-information">
-        <p><b>Bio One</b></p>
-        <p><b>경기도 수원시 팔달구 ....</b></p>
-        <p><b>Tel : 031-123-4567</b></p>
-        <p><b>Fax : 031-250-8901</b></p>
-        <p><b>사업자등록번호 : 111-23-45678</b></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Page content wrapper-->
-  <div id="page-content-wrapper">
-    <!-- Top navigation-->
-      <nav class="navbar navbar-expand-lg navbar-light border-bottom">
-          <div class="container-fluid">
-              <!--<button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>-->
-
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                  </ul>
-              </div>
-              <!-- login 관련 추가 -->
-              <div class="loginInfo">
-                  <div class="login" th:if="${employee == null}">
-                      <button th:onclick="location.href='/bio/login'">로그인</button>
-                  </div>
-                  <div class="logout" th:unless="${employee == null}">
-                      <h6>[[${employee.employeename}]]님 환영합니다.</h6>
-                      <button th:onclick="location.href='/bio/logout'">로그아웃</button>
-                  </div>
-              </div>
-          </div>
-      </nav>
-          <!-- Page content-->
-      <div class="container-fluid-1" layout:fragment="content">
-        <h1 class="mt-4">BioOne DashBoard</h1>
-
-        <!-- 대시보드에 그래프 추가 -->
-            <div class="d-flex" style="margin-left: 35px;">
-              <div class="card1" style="width: 30rem;">
-                <canvas id="myChart1" height="250" style="margin:10px;"></canvas>
-              </div>
-
-              <div class="card1" style="width: 25rem;">
-                <canvas id="myChart2" height="100" style="margin:10px;"></canvas>
-              </div>
+            <div class="company-information">
+                <p><b>Bio One</b></p>
+                <p><b>경기도 수원시 팔달구 ....</b></p>
+                <p><b>Tel : 031-123-4567</b></p>
+                <p><b>Fax : 031-250-8901</b></p>
+                <p><b>사업자등록번호 : 111-23-45678</b></p>
             </div>
-      </div>
-  </div>
+        </div>
+    </div>
+
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
+        <!-- Top navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light border-bottom">
+            <div class="container-fluid">
+                <!--<button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>-->
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                    </ul>
+                </div>
+                <!-- login 관련 추가 -->
+                <div class="loginInfo">
+                    <div class="login" th:if="${employee == null}">
+                        <button th:onclick="location.href='/bio/login'">로그인</button>
+                    </div>
+                    <div class="logout" th:unless="${employee == null}">
+                        <h6>[[${employee.employeename}]]님 환영합니다.</h6>
+                        <button th:onclick="location.href='/bio/logout'">로그아웃</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Page content-->
+        <div class="container-fluid-1" layout:fragment="content">
+            <h3 class="mt-4">BioOne 재고관리 시스템</h3>
+
+            <!-- 대시보드에 그래프 추가 -->
+            <div class="d-flex" style="margin-left: 35px;">
+                <div class="card1" style="width: 35rem;">
+                    <canvas id="myChart1" height="220" style="margin:10px;"></canvas>
+                    <div class="chartName">제품별 입출고량</div>
+                </div>
+
+                <div class="card1" style="width: 26rem;">
+                    <canvas id="myChart2" style="margin:10px;"></canvas>
+                    <div class="chartName">제품 효능군 분포</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 
@@ -111,94 +113,102 @@
 <!-- Chart.js 그래프 생성 스크립트-->
 <script th:inline="javascript">
 
-  var labels = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
-  var data = [60, 100, 180, 200, 160, 190, 220, 250, 210, 230, 250, 300];
+    var productInventoryData = [[${bioProductInventoryVData}]];
 
+    var labels = productInventoryData.map(function(item) {
+        return item[1];  // 제품명
+    });
 
-  var ctx1 = document.getElementById("myChart1").getContext('2d');
-  new Chart(ctx1, {
-    type: 'line',
-    data: {
-        labels: labels, //
-        datasets: [{
-            label: '2024년 월별실적',
-            backgroundColor: '#36a2eb',
-            borderColor: '#2c3e50',
-            borderWidth: 1,
-            data: data,
+    var totalReceived = productInventoryData.map(function(item) {
+        return item[2];  // 입고 수량
+    });
 
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            x: { position: 'bottom',
-            },
-            y: {
-                beginAtZero: true,
-                ticks: {
+    var totalShipped = productInventoryData.map(function(item) {
+        return item[3];  // 출고 수량
+    });
+
+    var ctx1 = document.getElementById("myChart1").getContext('2d');
+    new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: '입고량',
+                    backgroundColor: '#36a2eb',
+                    data: totalReceived
+                },
+                {
+                    label: '출고량',
+                    backgroundColor: '#ff6384',
+                    data: totalShipped
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
                     stepSize: 50,
                 },
-            },
+            }
         },
-       plugins: {
-          legend: {
-              position: 'bottom',
-              grid:{
-                 offset: true,
-                 },
-                 ticks: {
-                    padding: 20,
-                 },
-          },
-          tooltip: {
-              callbacks: {
-                  label: function(tooltipItem){
-                      return tooltipItem.label + ': ' + tooltipItem.raw;
-                      }
-                  }
-              }
-          }
-       }
+        plugins: {
+            legend: {
+                position: 'top',  // 범례를 왼쪽에 위치시킴
+                labels: {
+                    boxWidth: 20,  // 범례 박스의 크기 조정
+                    padding: 10,   // 범례 항목 사이 간격
+                }
+            }
+        }
+    }
+});
+
+
+    // 효능군 데이터 가공 (Object[] 배열의 데이터를 사용)
+    var efficacyGroupData = [[${efficacyGroupData}]];
+
+    var labels = efficacyGroupData.map(function(item) {
+        return item[0];  // 첫 번째 요소는 효능군 이름
     });
-  // 효능군 데이터 가공 (Object[] 배열의 데이터를 사용)
-  var efficacyGroupData = [[${efficacyGroupData}]];
 
-  var labels = efficacyGroupData.map(function(item) {
-      return item[0];  // 첫 번째 요소는 효능군 이름
-  });
+    var data = efficacyGroupData.map(function(item) {
+        return item[1];  // 두 번째 요소는 개수
+    });
 
-  var data = efficacyGroupData.map(function(item) {
-      return item[1];  // 두 번째 요소는 개수
-  });
-
-  // Chart.js 도넛 차트 생성
-  var ctx2 = document.getElementById("myChart2").getContext('2d');
-  new Chart(ctx2, {
-      type: 'doughnut',
-      data: {
-          labels: labels,
-          datasets: [{
-              backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56'],  // 효능군 색상
-              data: data,
-          }]
-      },
-      options: {
-          responsive: true,
-          plugins: {
-              legend: {
-                  position: 'left',
-              },
-              tooltip: {
-                  callbacks: {
-                      label: function(tooltipItem) {
-                          return tooltipItem.label + ': ' + tooltipItem.raw;
-                      }
-                  }
-              }
-          }
-      }
-  });
+    // Chart.js 도넛 차트 생성
+    var ctx2 = document.getElementById("myChart2").getContext('2d');
+    new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56'],  // 효능군 색상
+                data: data,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': ' + tooltipItem.raw;
+                        }
+                    }
+                }
+            }
+        }
+    });
 
 </script>
 </html>

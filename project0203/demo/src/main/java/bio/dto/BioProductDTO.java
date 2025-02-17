@@ -35,5 +35,6 @@ public class BioProductDTO {
     private String registeredBy;
     private LocalDateTime regDate;
     private LocalDateTime modDate;
+    private String imageFileName;
 }
 

@@ -63,6 +63,25 @@ public class BioProductController {
     public void read(Long bioNo, BioProductPageRequestDTO bioProductPageRequestDTO, Model model){
         BioProductDTO bioProductDTO = bioProductService.readOne(bioNo);
         log.info(bioProductDTO);
+
+        if(bioNo == 1L){
+            bioProductDTO.setImageFileName("img1.png");
+        } else if(bioNo == 2L){
+            bioProductDTO.setImageFileName("img2.png");
+        } else if(bioNo == 3L){
+            bioProductDTO.setImageFileName("img3.png");
+        } else if(bioNo == 4L){
+            bioProductDTO.setImageFileName("img4.png");
+        } else if(bioNo == 5L){
+            bioProductDTO.setImageFileName("img5.png");
+        } else if(bioNo == 6L){
+            bioProductDTO.setImageFileName("img6.png");
+        } else if(bioNo == 7L){
+            bioProductDTO.setImageFileName("img7.png");
+        } else{
+            bioProductDTO.setImageFileName("img8.png");
+        }
+
         model.addAttribute("dto", bioProductDTO);
     }
 

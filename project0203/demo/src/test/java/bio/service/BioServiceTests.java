@@ -57,21 +57,21 @@ public class BioServiceTests {
 //        log.info(responseDTO);
 //
 //    }
-//
-//    @Test
-//    public void testList() {
-//        // BioProductInventoryVPageRequestDTO 객체로 수정
-//        BioProductInventoryVPageRequestDTO bioProductInventoryVPageRequestDTO = BioProductInventoryVPageRequestDTO.builder()
-//                .type("")  // 필터링 조건을 비워둠
-//                .keyword("")  // 필터링 조건을 비워둠
-//                .page(1)  // 첫 번째 페이지
-//                .size(Integer.MAX_VALUE)  // 최대 크기
-//                .build();
-//
-//        // bioProductInventoryVService의 list 메소드를 호출하여 데이터 조회
-//        BioProductInventoryVPageResponseDTO responseDTO = bioProductInventoryVService.list(bioProductInventoryVPageRequestDTO);
-//
-//        // 결과 로깅
-//        log.info(responseDTO);
-//    }
-//}
+
+    @Test
+    public void testList() {
+        // BioProductInventoryVPageRequestDTO 객체로 수정
+        BioProductInventoryVPageRequestDTO bioProductInventoryVPageRequestDTO = BioProductInventoryVPageRequestDTO.builder()
+                .type("")  // 필터링 조건을 비워둠
+                .keyword("")  // 필터링 조건을 비워둠
+                .page(1)  // 첫 번째 페이지
+                .size(Integer.MAX_VALUE)  // 최대 크기
+                .build();
+
+        // bioProductInventoryVService의 list 메소드를 호출하여 데이터 조회
+        BioProductInventoryVPageResponseDTO responseDTO = bioProductInventoryVService.list(bioProductInventoryVPageRequestDTO);
+
+        // 결과 로깅
+        log.info(responseDTO);
+    }
+}

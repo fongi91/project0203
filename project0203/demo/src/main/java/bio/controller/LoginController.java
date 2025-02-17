@@ -28,26 +28,26 @@ public class LoginController {
 
     public static Hashtable<String, HttpSession> sessionList = new Hashtable<>();
 
-    @GetMapping("/dashboard")
-    public String dashboard(HttpSession session, Model model) {
-        // 세션에서 사용자 정보 가져오기
-        Employees employees = (Employees) session.getAttribute("employees");
-
-        if (employees != null) {
-            model.addAttribute("employee", employees);
-            model.addAttribute("employeeName", employees.getEmployeename());
-            List<Object[]> efficacyGroupData = bioProductService.getEfficacyGroupDistribution();
-            model.addAttribute("efficacyGroupData", efficacyGroupData);  // 모델에 데이터 담기
-
-            log.info("Employee in session: " + employees);
-            log.info("EmployeeRole in session: " + employees.getRole());
-
-            return "bio/dashboard"; // 대시보드 페이지로 이동
-        } else {
-            return "redirect:/bio/login"; // 로그인하지 않으면 로그인 페이지로 이동
-        }
-
-    }
+//    @GetMapping("/dashboard")
+//    public String dashboard(HttpSession session, Model model) {
+//        // 세션에서 사용자 정보 가져오기
+//        Employees employees = (Employees) session.getAttribute("employees");
+//
+//        if (employees != null) {
+//            model.addAttribute("employee", employees);
+//            model.addAttribute("employeeName", employees.getEmployeename());
+//            List<Object[]> efficacyGroupData = bioProductService.getEfficacyGroupDistribution();
+//            model.addAttribute("efficacyGroupData", efficacyGroupData);  // 모델에 데이터 담기
+//
+//            log.info("Employee in session: " + employees);
+//            log.info("EmployeeRole in session: " + employees.getRole());
+//
+//            return "bio/dashboard"; // 대시보드 페이지로 이동
+//        } else {
+//            return "redirect:/bio/login"; // 로그인하지 않으면 로그인 페이지로 이동
+//        }
+//
+//    }
 
     @GetMapping("/login")
     public String loginPage(Model model,

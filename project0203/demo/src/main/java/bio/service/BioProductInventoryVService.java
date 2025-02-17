@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+
 public interface BioProductInventoryVService {
     BioProductInventoryVPageResponseDTO list(BioProductInventoryVPageRequestDTO bioProductInventoryVPageRequestDTO);
+    List<Object[]> getBioProductInventoryVData();
 }
