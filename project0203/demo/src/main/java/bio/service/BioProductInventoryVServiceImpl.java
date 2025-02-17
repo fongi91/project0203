@@ -29,9 +29,12 @@ public class BioProductInventoryVServiceImpl implements BioProductInventoryVServ
         //브라우저에서 요청한 파라미터 값 세팅
         String[] types = bioProductInventoryVPageRequestDTO.getTypes();
         String keyword = bioProductInventoryVPageRequestDTO.getKeyword();
+        String startDate = bioProductInventoryVPageRequestDTO.getStartDate();
+        String endDate = bioProductInventoryVPageRequestDTO.getEndDate();
+
         Pageable pageable = bioProductInventoryVPageRequestDTO.getPageable("no");
 
-        Page<BioProductInventoryV> result = bioProductInventoryVRepository.searchAll(types, keyword, pageable);
+        Page<BioProductInventoryV> result = bioProductInventoryVRepository.searchAll(types, keyword, pageable, startDate, endDate);
 
         List<BioProductInventoryVDTO> dtoList = result.getContent().stream()
                 .map(bioProductInventoryV -> modelMapper.map(bioProductInventoryV, BioProductInventoryVDTO.class)).collect(Collectors.toList());

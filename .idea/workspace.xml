@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="590c5216-4d2c-49cc-a10f-25392c1da9cf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/controller/BioProductInventoryVController.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/controller/BioProductInventoryVController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/dto/BioProductInventoryVPageRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/dto/BioProductInventoryVPageRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/repository/search/BioProductInventoryVSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/repository/search/BioProductInventoryVSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/repository/search/BioProductInventoryVSearchImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/repository/search/BioProductInventoryVSearchImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/service/BioProductInventoryVServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/java/bio/service/BioProductInventoryVServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/resources/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/static/css/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/bioProductInventoryVList.html" beforeDir="false" afterPath="$PROJECT_DIR$/project0203/demo/src/main/resources/templates/bio/bioProductInventoryVList.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +70,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/project0203/project0203/demo/src/main/resources/templates/bio&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/java/pro_2_0211_1210&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,

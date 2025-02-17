@@ -31,6 +31,9 @@ public class BioProductInventoryVPageRequestDTO {
 
     private boolean isToggle; // toggle메뉴인지 아닌지 여부
 
+    private String startDate;
+    private String endDate;
+
     public String[] getTypes(){
         if(type == null || type.isEmpty()){
             return null;

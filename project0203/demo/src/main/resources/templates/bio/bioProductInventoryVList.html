@@ -22,6 +22,7 @@
                             <option value="n" th:selected="${bioProductInventoryVPageRequestDTO.type =='n'}">제품이름</option>
                             <option value="c" th:selected="${bioProductInventoryVPageRequestDTO.type =='c'}">카테고리</option>
                             <option value="t" th:selected="${bioProductInventoryVPageRequestDTO.type =='t'}">생산유형</option>
+                            <option value="d" th:selected="${bioProductInventoryVPageRequestDTO.type == 'd'}">(기준)날짜</option>
                         </select>
                     </div>
                     <input type="text" class="form-control" name="keyword" th:value="${bioProductInventoryVPageRequestDTO.keyword}">
@@ -30,6 +31,15 @@
                         <button class="btn btn-outline-secondary clearBtn" type="button">초기화</button>
                     </div>
                 </div>
+
+                <!--날짜 검색 UI 추가-->
+                <div id="dateSearchFields">
+                    <label for="startDate">시작</label>
+                    <input type="date" class="form-control-1" name="startDate" th:value="${bioProductInventoryVPageRequestDTO.startDate}">
+                    <label for="endDate">끝</label>
+                    <input type="date" class="form-control-1" name="endDate" th:value="${bioProductInventoryVPageRequestDTO.endDate}">
+                </div>
+
             </div>
         </form>
     </div>
@@ -72,9 +82,6 @@
                     </table>
 
 
-                    <!--등록 버튼 누르면 register 로 이동-->
-                    <button class="btn btn-primary register-button" type="button">등록</button>
-
 
                     <!--게시물 페이징 UI-->
                     <div class="float-end">
@@ -100,40 +107,44 @@
 
 
 <script layout:fragment="script" th:inline="javascript">
-
     $(document).ready(function(){
-        //clear 버튼
+        // clear 버튼
         $(".clearBtn").click(function(e){
             e.preventDefault();
             e.stopPropagation();
-            window.location.href = '/bio/bioProductList';
+            window.location.href = '/bio/bioProductInventoryVList';
         });
 
-        $(".register-button").click(function(e){
+        // 날짜 선택에 따른 동적 UI 변화
+        $("select[name='type']").change(function() {
+            const selectedType = $(this).val();
+            if (selectedType == 'd') {
+                // 날짜 필드를 보이도록 설정
+                $("#dateSearchFields").show();
+            } else {
+                // 날짜 필드를 숨기도록 설정
+                $("#dateSearchFields").hide();
+            }
+        });
+
+        // 페이지 번호 클릭 처리
+        $('.pagination').on('click', 'a', function(e){
             e.preventDefault();
             e.stopPropagation();
-            window.location.href = '/bio/bioProductRegister';
+
+            const target = e.target;
+            const num = target.getAttribute("data-num");
+
+            const formObj = $('form');
+            formObj.append(`<input type='hidden' name='page' value='${num}'>`);
+            formObj.submit();
         });
 
-    });
-
-     $('.pagination').on('click', 'a', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-
-        const target = e.target;
-        const num = target.getAttribute("data-num");
-
-        const formObj = $('form');
-        formObj.append(`<input type='hidden' name='page' value='${num}'>`);
-        formObj.submit();
-
-        });
-
-        //register 후 alert
-        const result = [[${result}]]
-        if(result){
-          alert("작업이 완료되었습니다.");
+        // 페이지 로딩 시 선택된 타입에 따라 날짜 필드 보이기
+        if ($("select[name='type']").val() == 'd') {
+            $("#dateSearchFields").show();
+        } else {
+            $("#dateSearchFields").hide();
         }
-
+    });
 </script>
