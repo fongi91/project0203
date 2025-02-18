@@ -40,9 +40,10 @@ public class BioInvReceiving extends BioInvReceivingEntity {
         return bioProduct != null ? bioProduct.getProductName() : null;
     }
 
-    public void change(String productCode, Long quantity, String supplier, String warehouseLocation, LocalDate receivingDate, String registeredBy, Boolean isReceived){
+    public void change(String productCode, Long quantity, LocalDate shelfLife, String supplier, String warehouseLocation, LocalDate receivingDate, String registeredBy, Boolean isReceived){
         this.productCode = productCode;
         this.quantity = quantity;
+        this.shelfLife = shelfLife;
         this.supplier = supplier;
         this.warehouseLocation = warehouseLocation;
         this.receivingDate = receivingDate;
