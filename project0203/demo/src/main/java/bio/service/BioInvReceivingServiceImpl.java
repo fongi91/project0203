@@ -60,7 +60,7 @@ public class BioInvReceivingServiceImpl implements BioInvReceivingService{
     public void modify(BioInvReceivingDTO bioInvReceivingDTO){
         Optional<BioInvReceiving> result = bioInvReceivingRepository.findById(bioInvReceivingDTO.getReceivingId());
         BioInvReceiving bioInvReceiving = result.orElseThrow();
-        bioInvReceiving.change(bioInvReceivingDTO.getProductCode(), bioInvReceivingDTO.getQuantity(), bioInvReceivingDTO.getSupplier(),bioInvReceivingDTO.getWarehouseLocation(), bioInvReceivingDTO.getReceivingDate(),bioInvReceivingDTO.getRegisteredBy(), bioInvReceivingDTO.getIsReceived());
+        bioInvReceiving.change(bioInvReceivingDTO.getProductCode(), bioInvReceivingDTO.getQuantity(), bioInvReceivingDTO.getShelfLife(), bioInvReceivingDTO.getSupplier(),bioInvReceivingDTO.getWarehouseLocation(), bioInvReceivingDTO.getReceivingDate(),bioInvReceivingDTO.getRegisteredBy(), bioInvReceivingDTO.getIsReceived());
         bioInvReceivingRepository.save(bioInvReceiving);
     }
 
