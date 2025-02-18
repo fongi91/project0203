@@ -14,11 +14,11 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <select class="form-select" name="type" id="searchType">
-                            <option value="pqclr" th:selected="${bioInvStockHistoryPageRequestDTO.type == 'pqclr'}">전 체</option>
+                            <option value="pqld" th:selected="${bioInvStockHistoryPageRequestDTO.type == 'pqlr'}">전 체</option>
                             <option value="p" th:selected="${bioInvStockHistoryPageRequestDTO.type == 'p'}">제품코드</option>
                             <option value="q" th:selected="${bioInvStockHistoryPageRequestDTO.type == 'q'}">재고수량</option>
                             <option value="l" th:selected="${bioInvStockHistoryPageRequestDTO.type == 'l'}">창고위치</option>
-                            <option value="d" th:selected="${bioInvStockHistoryPageRequestDTO.type == 'd'}">유통기한</option>
+                            <option value="d" th:selected="${bioInvStockHistoryPageRequestDTO.type == 'd'}">작업일</option>
                         </select>
                     </div>
 
