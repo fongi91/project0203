@@ -15,9 +15,6 @@
                 </div>
                 <div class="card-body">
                     <form th:action="@{/bio/Employeesmodify}" method="post" id="f1">
-                        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-                            <span th:text="${errorMessage}"></span>
-                        </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">ENO</span>
                             <input type="text" class="form-control" th:value="${dto.eno}" name="eno" readonly>

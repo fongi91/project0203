@@ -10,5 +10,6 @@ import java.util.Map;
 public interface BioInvStockService {
     BioInvStockPageResponseDTO<BioInvStockDTO> list(BioInvStockPageRequestDTO bioInvStockPageRequestDTO);
     // 입고량과 출고량을 반환하는 메서드를 추가
-    List<Map<String, Object>> getReceivedAndShippedQuantities();
+    List<Map<String, Object>> getReceivedAndShippedQuantities(); // 이 부분 추가
+
 }

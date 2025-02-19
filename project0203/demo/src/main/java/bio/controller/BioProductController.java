@@ -47,6 +47,24 @@ public class BioProductController {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return "redirect:/bio/bioProductRegister";
         }
+
+
+//        // 이미지 파일 처리
+//        if (!productImage.isEmpty()) {
+//            try {
+//                String imageFileName = productImage.getOriginalFilename();
+//                File destination = new File("path/to/your/upload/directory", imageFileName);
+//                productImage.transferTo(destination);
+//                bioProductDTO.setImageFileName(imageFileName);
+//            } catch (IOException e) {
+//                log.error("Image upload failed", e);
+//                redirectAttributes.addFlashAttribute("errorMessage", "이미지 업로드에 실패했습니다.");
+//                return "redirect:/bio/bioProductRegister";
+//            }
+//        }
+//
+
+
         log.info(bioProductDTO);
         try {
             String productCode = bioProductService.register(bioProductDTO);
@@ -56,6 +74,10 @@ public class BioProductController {
             redirectAttributes.addFlashAttribute("errorMessage", "중복된 제품코드는 사용할 수 없습니다.");
             return "redirect:/bio/bioProductRegister";
         }
+
+
+
+
         return "redirect:/bio/bioProductList";
     }
 

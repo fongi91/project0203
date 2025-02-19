@@ -12,8 +12,9 @@ import java.io.Serializable;
 @ToString
 @Builder
 public class BioProduct extends BioProductEntity implements Serializable{
+
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String productCode;
     @Column
     private String productName;

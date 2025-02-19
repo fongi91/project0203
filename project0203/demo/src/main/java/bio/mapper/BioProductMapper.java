@@ -12,5 +12,4 @@ public interface BioProductMapper {
     // 효능군별 개수를 조회하는 메서드
     List<Map<String, Object>> countByEfficacyGroup();
 
-
 }

@@ -45,14 +45,9 @@ public class BioInvStockSearchImpl implements BioInvStockSearch {
             }
         }
 
-        //  유통기한 검색 조건 추가
-        if (hasDateKeyword) {
-            conditions.add("b.shelfLife = :shelfLife");
-        }
-
         //  WHERE 조건을 동적으로 추가
         String conditionString = conditions.isEmpty() ? "" : " WHERE " + String.join(" AND ", conditions);
-        String finalQuery = baseQuery + conditionString + " ORDER BY b.shelfLife DESC";
+        String finalQuery = baseQuery + conditionString + " ORDER BY b.productCode ASC";
         String countQueryFinal = countQueryBase + conditionString;
 
         //  JPQL 쿼리 실행
@@ -63,12 +58,6 @@ public class BioInvStockSearchImpl implements BioInvStockSearch {
         if (hasKeyword) {
             query.setParameter("keyword", "%" + keyword + "%");
             countQuery.setParameter("keyword", "%" + keyword + "%");
-        }
-
-        if (hasDateKeyword) {
-            LocalDate date = LocalDate.parse(dateKeyword);
-            query.setParameter("shelfLife", date);
-            countQuery.setParameter("shelfLife", date);
         }
 
         //  페이징 처리

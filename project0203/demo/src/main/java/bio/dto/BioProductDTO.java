@@ -1,6 +1,7 @@
 package bio.dto;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -31,6 +32,9 @@ public class BioProductDTO {
     private String productionType;
     @NotBlank(message="설명란은 필수입력 항목입니다.")
     private String description;
+
+//    // 추가: 파일을 받을 MultipartFile 타입 필드 추가
+//    private MultipartFile productImage;
 
     private String registeredBy;
     private LocalDateTime regDate;
