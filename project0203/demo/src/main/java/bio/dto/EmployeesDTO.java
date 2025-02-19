@@ -1,5 +1,6 @@
 package bio.dto;
 
+import bio.domain.EmployeeRole;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,4 +36,7 @@ public class EmployeesDTO {
     private String registeredby;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registereddate;
+
+    private EmployeeRole role;
+
 }

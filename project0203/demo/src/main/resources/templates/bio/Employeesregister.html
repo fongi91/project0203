@@ -36,7 +36,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">부서</span>
-                            <select name="department" class="form-select">
+                            <select name="department" class="form-select" id="departmentSelect">
                                 <option value="">부서를 선택해주세요</option>
                                 <option value="인사팀">인사팀</option>
                                 <option value="물류팀">물류팀</option>
@@ -47,6 +47,14 @@
                                 <option value="구매팀">구매팀</option>
                                 <option value="재무팀">재무팀</option>
                                 <option value="admin">admin</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">Role</span>
+                            <select name="role" class="form-select" id="roleSelect">
+                                <option value="0">ADMIN</option>
+                                <option value="1">HR</option>
+                                <option value="2">LOGISTICS</option>
                             </select>
                         </div>
                         <div class="input-group mb-3">
@@ -95,5 +103,20 @@
         }
         alert(errorMsg);
     }
+
+    //부서 선택시 role 선택
+    document.getElementById("departmentSelect").addEventListener("change", function () {
+        let department = this.value;
+        let roleSelect = document.getElementById("roleSelect");
+
+        if (department === "인사팀") {
+            roleSelect.value = "1"; // HR
+        } else if (department === "물류팀") {
+            roleSelect.value = "2"; // LOGISTICS
+        } else {
+            roleSelect.value = ""; // 기본값 (선택 안 된 상태)
+        }
+    });
+
 
 </script>
