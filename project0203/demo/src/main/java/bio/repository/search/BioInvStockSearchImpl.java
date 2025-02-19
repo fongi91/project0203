@@ -47,7 +47,7 @@ public class BioInvStockSearchImpl implements BioInvStockSearch {
 
         //  WHERE 조건을 동적으로 추가
         String conditionString = conditions.isEmpty() ? "" : " WHERE " + String.join(" AND ", conditions);
-        String finalQuery = baseQuery + conditionString + " ORDER BY b.shelfLife DESC";
+        String finalQuery = baseQuery + conditionString + " ORDER BY b.productCode ASC";
         String countQueryFinal = countQueryBase + conditionString;
 
         //  JPQL 쿼리 실행
