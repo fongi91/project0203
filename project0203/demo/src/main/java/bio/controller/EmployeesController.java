@@ -70,18 +70,31 @@ public class EmployeesController {
     public String modify(EmployeesPageRequestDTO employeesPageRequestDTO,
                          @Valid EmployeesDTO employeesDTO,
                          BindingResult bindingResult,
-                         RedirectAttributes redirectAttributes){
-        if (bindingResult.hasErrors()){
-            String link = employeesPageRequestDTO.getLink();
+                         RedirectAttributes redirectAttributes) {
+
+        String link = employeesPageRequestDTO.getLink();
+
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addAttribute("eno", employeesDTO.getEno());
-            return "redirect:/bio/Employeesmodify?"+link;
+            return "redirect:/bio/Employeesmodify?" + link;
         }
-        employeesService.modify(employeesDTO);
-        redirectAttributes.addFlashAttribute("result", "modified");
-        redirectAttributes.addAttribute("eno", employeesDTO.getEno());
+
+        try {
+            employeesService.modify(employeesDTO);
+            redirectAttributes.addFlashAttribute("result", "modified");
+            redirectAttributes.addAttribute("eno", employeesDTO.getEno());
+        } catch (DataIntegrityViolationException e) {
+            log.error("중복 사원번호", e);
+            redirectAttributes.addFlashAttribute("errorMessage", "중복된 사원번호는 사용할 수 없습니다.");
+            redirectAttributes.addAttribute("eno", employeesDTO.getEno());  // eno 값 추가
+            return "redirect:/bio/Employeesmodify?" + link;
+        }
+
         return "redirect:/bio/Employeesread";
     }
+
+
 
     @PostMapping("/Employeesremove")
     public String remove(Long eno,
