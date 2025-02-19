@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,12 +37,16 @@ public class BioInvStockHistorySearchImpl implements BioInvStockHistorySearch {
                     case "p": typeConditions.add("b.productCode LIKE :keyword"); break;
                     case "q": typeConditions.add("CAST(b.quantityChange AS string) LIKE :keyword"); break;
                     case "l": typeConditions.add("b.warehouseLocation LIKE :keyword"); break;
-                    case "r": typeConditions.add("b.changeDate LIKE :keyword"); break;
                 }
             }
             if (!typeConditions.isEmpty()) {
                 conditions.add("(" + String.join(" OR ", typeConditions) + ")");
             }
+        }
+
+        //  작업일자 검색 조건 추가
+        if (hasDateKeyword) {
+            conditions.add("b.changeDate = :changeDate");
         }
 
         //  WHERE 조건을 동적으로 추가
@@ -57,6 +62,11 @@ public class BioInvStockHistorySearchImpl implements BioInvStockHistorySearch {
         if (hasKeyword) {
             query.setParameter("keyword", "%" + keyword + "%");
             countQuery.setParameter("keyword", "%" + keyword + "%");
+        }
+        if (hasDateKeyword) {
+            LocalDate date = LocalDate.parse(dateKeyword);
+            query.setParameter("changeDate", date);
+            countQuery.setParameter("changeDate", date);
         }
 
         //  페이징 처리
