@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bio.mapper.BioInvStockMapper">
+    <select id="getReceivedAndShippedQuantities" resultType="map">
+        SELECT
+        p.product_name AS productName,
+        COALESCE(r.totalReceived, 0) AS totalReceived,
+        COALESCE(s.totalShipped, 0) AS totalShipped
+        FROM
+        bio_product p
+        LEFT JOIN
+        (SELECT product_code, SUM(quantity) AS totalReceived
+        FROM bio_inv_receiving
+        GROUP BY product_code) r
+        ON p.product_code = r.product_code
+        LEFT JOIN
+        (SELECT product_code, SUM(quantity) AS totalShipped
+        FROM bio_inv_shipping
+        GROUP BY product_code) s
+        ON p.product_code = s.product_code;
+    </select>
+</mapper>

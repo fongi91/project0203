@@ -15,9 +15,6 @@
                 </div>
                 <div class="card-body">
                     <form action="/bio/Employeesregister" method="post">
-                        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-                            <span th:text="${errorMessage}"></span>
-                        </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">사원번호</span>
                             <input type="text" name="employeeid" class="form-control" placeholder="사원 번호를 입력해주세요.">
@@ -66,7 +63,11 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">작성자</span>
+
+                            <input type="text" name="registeredby" class="form-control" th:value="${employee.employeename}">
+
                             <input type="text" name="registeredby" class="form-control" th:value="${employee.employeename}" readonly>
+
                         </div>
                         <div class="my-4">
                             <div class="float-end">

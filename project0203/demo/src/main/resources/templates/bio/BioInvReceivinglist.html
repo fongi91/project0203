@@ -65,6 +65,9 @@
                         </tr>
                         </thead>
                         <tbody th:with="link = ${bioInvReceivingPageRequestDTO.getLink()}">
+                        <tr th:if="${#lists.isEmpty(responseDTO.dtoList)}">
+                            <td colspan="10" style="text-align:center;">검색 결과가 없습니다.</td>
+                        </tr>
                         <tr th:each="dto:${responseDTO.dtoList}">
                             <td style="text-align:center;"><a th:href="|@{/bio/BioInvReceivingread(receivingId =${dto.receivingId})}&${link}|">[[${dto.receivingId}]]</a></td>
                             <td style="text-align:center;">[[${dto.productCode}]]</td>

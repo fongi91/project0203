@@ -57,6 +57,9 @@
                         </tr>
                         </thead>
                         <tbody th:with="link = ${bioProductPageRequestDTO.getLink()}">
+                        <tr th:if="${#lists.isEmpty(responseDTO.dtoList)}">
+                            <td colspan="10" style="text-align:center;">검색 결과가 없습니다.</td>
+                        </tr>
                         <tr th:each="dto : ${responseDTO.dtoList}">
                             <!-- <th scope="row">[[${dto.bioNo}]]</th> -->
 
