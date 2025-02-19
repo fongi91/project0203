@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bio.mapper.BioProductMapper">
+    <!-- 효능군별 개수를 조회 -->
+    <select id="countByEfficacyGroup" resultType="map">
+        SELECT
+        efficacy_group,
+        COUNT(*) AS count
+        FROM
+        bio_product
+        GROUP BY
+        efficacy_group
+    </select>
+</mapper>

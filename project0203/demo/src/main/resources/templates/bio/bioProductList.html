@@ -18,10 +18,10 @@
                     <div class="input-group-prepend">
                         <select class="form-select" name="type">
                             <option value="cgunt" th:selected="${bioProductPageRequestDTO.type == 'cgunt'}">전 체</option>
-                            <option value="c" th:selected="${bioProductPageRequestDTO.type =='c'}">카테고리</option>
-                            <option value="g" th:selected="${bioProductPageRequestDTO.type =='g'}">효능군</option>
-                            <option value="u" th:selected="${bioProductPageRequestDTO.type =='u'}">포장단위</option>
                             <option value="n" th:selected="${bioProductPageRequestDTO.type =='n'}">제품명</option>
+                            <option value="c" th:selected="${bioProductPageRequestDTO.type =='c'}">카테고리</option>
+                            <option value="u" th:selected="${bioProductPageRequestDTO.type =='u'}">포장단위</option>
+                            <option value="g" th:selected="${bioProductPageRequestDTO.type =='g'}">효능군</option>
                             <option value="t" th:selected="${bioProductPageRequestDTO.type =='t'}">생산유형</option>
                         </select>
                     </div>
@@ -62,7 +62,7 @@
 
                             <td>[[${dto.productCode}]]</td>
                             <td>
-                                <a th:href="|@{/bio/bioProductRead(bioNo=${dto.bioNo})}&${link}|">[[${dto.ProductName}]]</a>
+                                <a th:href="|@{/bio/bioProductRead(productCode=${dto.productCode})}&${link}|">[[${dto.ProductName}]]</a>
                             </td>
                             <td>[[${dto.currentCategory}]]</td>
                             <td>[[${dto.packagingUnit}]]</td>

@@ -14,8 +14,6 @@ import java.io.Serializable;
 public class BioProduct extends BioProductEntity implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bioNo;
-    @Column(unique = true)
     private String productCode;
     @Column
     private String productName;
@@ -31,6 +29,9 @@ public class BioProduct extends BioProductEntity implements Serializable{
     private String registeredBy;
     @Column
     private String description;
+
+    @Column(unique = true)
+    private Long bioNo;
 
     public void change(String productName, String currentCategory, String packagingUnit, String efficacyGroup, String productionType, String description){
         this.productName = productName;

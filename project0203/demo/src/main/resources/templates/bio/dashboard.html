@@ -33,8 +33,11 @@
                        th:href="@{/bio/BioInvReceivinglist}">입고관리</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
                        th:href="@{/bio/BioInvShippinglist}">출고관리</a>
+
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
-                       th:href="@{/bio/bioProductInventoryVList}">재고관리</a>
+                       th:href="@{/bio/BioInvStocklist}">재고현황</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
+                       th:href="@{/bio/BioInvStockHistorylist}">재고이력</a>
                 </div>
 
                 <div th:if="${isHr}">
@@ -49,8 +52,11 @@
                        th:href="@{/bio/BioInvReceivinglist}">입고관리</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
                        th:href="@{/bio/BioInvShippinglist}">출고관리</a>
+
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
-                       th:href="@{/bio/bioProductInventoryVList}">재고관리</a>
+                       th:href="@{/bio/BioInvStocklist}">재고현황</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 custom-menu-item"
+                       th:href="@{/bio/BioInvStockHistorylist}">재고이력</a>
                 </div>
             </div>
 
@@ -113,18 +119,18 @@
 <!-- Chart.js 그래프 생성 스크립트-->
 <script th:inline="javascript">
 
-    var productInventoryData = [[${bioProductInventoryVData}]];
+    var productData = [[${receivedAndShippedData}]];
 
-    var labels = productInventoryData.map(function(item) {
-        return item[1];  // 제품명
+    var labels = productData.map(function(item) {
+        return item.productName;
     });
 
-    var totalReceived = productInventoryData.map(function(item) {
-        return item[2];  // 입고 수량
+    var totalReceived = productData.map(function(item) {
+        return item.totalReceived;  // 입고 수량
     });
 
-    var totalShipped = productInventoryData.map(function(item) {
-        return item[3];  // 출고 수량
+    var totalShipped = productData.map(function(item) {
+        return item.totalShipped;  // 출고 수량
     });
 
     var ctx1 = document.getElementById("myChart1").getContext('2d');
@@ -172,14 +178,14 @@
 
 
     // 효능군 데이터 가공 (Object[] 배열의 데이터를 사용)
-    var efficacyGroupData = [[${efficacyGroupData}]];
+  var efficacyGroupData = [[${efficacyGroupData}]];
 
-    var labels = efficacyGroupData.map(function(item) {
-        return item[0];  // 첫 번째 요소는 효능군 이름
+    var efficacyLabels = efficacyGroupData.map(function(item) {
+        return item.efficacy_group;  // Map에서 효능군 이름
     });
 
-    var data = efficacyGroupData.map(function(item) {
-        return item[1];  // 두 번째 요소는 개수
+    var efficacyData = efficacyGroupData.map(function(item) {
+        return item.count;  // Map에서 개수
     });
 
     // Chart.js 도넛 차트 생성
@@ -187,10 +193,10 @@
     new Chart(ctx2, {
         type: 'pie',
         data: {
-            labels: labels,
+            labels: efficacyLabels,
             datasets: [{
-                backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56'],  // 효능군 색상
-                data: data,
+                backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56'],
+                data: efficacyData,
             }]
         },
         options: {

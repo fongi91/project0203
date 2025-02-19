@@ -49,8 +49,8 @@ public class BioProductController {
         }
         log.info(bioProductDTO);
         try {
-            Long bioNo = bioProductService.register(bioProductDTO);
-            redirectAttributes.addFlashAttribute("result", bioNo);
+            String productCode = bioProductService.register(bioProductDTO);
+            redirectAttributes.addFlashAttribute("result", productCode);
         } catch(DataIntegrityViolationException e){
             log.error("중복 제품코드", e);
             redirectAttributes.addFlashAttribute("errorMessage", "중복된 제품코드는 사용할 수 없습니다.");
@@ -60,23 +60,23 @@ public class BioProductController {
     }
 
     @GetMapping({"/bioProductRead", "/bioProductModify"})
-    public void read(Long bioNo, BioProductPageRequestDTO bioProductPageRequestDTO, Model model){
-        BioProductDTO bioProductDTO = bioProductService.readOne(bioNo);
+    public void read(String productCode, BioProductPageRequestDTO bioProductPageRequestDTO, Model model){
+        BioProductDTO bioProductDTO = bioProductService.readOne(productCode);
         log.info(bioProductDTO);
 
-        if(bioNo == 1L){
+        if("B0001".equals(productCode)){
             bioProductDTO.setImageFileName("img1.png");
-        } else if(bioNo == 2L){
+        } else if("B0002".equals(productCode)){
             bioProductDTO.setImageFileName("img2.png");
-        } else if(bioNo == 3L){
+        } else if("B0003".equals(productCode)){
             bioProductDTO.setImageFileName("img3.png");
-        } else if(bioNo == 4L){
+        } else if("B0004".equals(productCode)){
             bioProductDTO.setImageFileName("img4.png");
-        } else if(bioNo == 5L){
+        } else if("B0005".equals(productCode)){
             bioProductDTO.setImageFileName("img5.png");
-        } else if(bioNo == 6L){
+        } else if("B0006".equals(productCode)){
             bioProductDTO.setImageFileName("img6.png");
-        } else if(bioNo == 7L){
+        } else if("B0007".equals(productCode)){
             bioProductDTO.setImageFileName("img7.png");
         } else{
             bioProductDTO.setImageFileName("img8.png");
@@ -95,21 +95,20 @@ public class BioProductController {
             log.info("bindingResult has errors!!!!!");
             String link = bioProductPageRequestDTO.getLink();
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            redirectAttributes.addAttribute("bioNo", bioProductDTO.getBioNo());
+            redirectAttributes.addAttribute("productCode", bioProductDTO.getProductCode());
             return "redirect:/bio/bioProductModify?"+link;
         }
         bioProductService.modify(bioProductDTO);
         redirectAttributes.addFlashAttribute("result", "modified");
-        redirectAttributes.addAttribute("bioNo", bioProductDTO.getBioNo());
+        redirectAttributes.addAttribute("productCode", bioProductDTO.getProductCode());
         return "redirect:/bio/bioProductRead";
     }
 
     @PostMapping("/bioProductRemove")
-    public String remove(Long bioNo, RedirectAttributes redirectAttributes){
-        log.info("remove.....post....." + bioNo);
-        bioProductService.remove(bioNo);
+    public String remove(String productCode, RedirectAttributes redirectAttributes){
+        log.info("remove.....post....." + productCode);
+        bioProductService.remove(productCode);
         redirectAttributes.addFlashAttribute("result", "removed");
         return "redirect:/bio/bioProductList";
     }
-
 }

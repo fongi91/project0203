@@ -16,7 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -27,6 +29,7 @@ import java.util.stream.Collectors;
 public class BioInvStockServiceImpl implements BioInvStockService{
     private final ModelMapper modelMapper;
     private final BioInvStockRepository bioInvStockRepository;
+
 
     @Autowired
     public BioInvStockServiceImpl(ModelMapper modelMapper, BioInvStockRepository bioInvStockRepository, BioInvStockRepository bioInvStockRepository1) {
@@ -70,5 +73,18 @@ public class BioInvStockServiceImpl implements BioInvStockService{
                 .dtoList(dtoList)
                 .total((int)result.getTotalElements())
                 .build();
+    }
+
+    public List<Map<String, Object>> getReceivedAndShippedQuantities() {
+        List<Object[]> results = bioInvStockRepository.getReceivedAndShippedQuantities();
+
+        // 결과를 Map 형태로 변환하여 반환
+        return results.stream().map(result -> {
+            Map<String, Object> data = new HashMap<>();
+            data.put("productName", result[0]);
+            data.put("totalReceived", result[1]);
+            data.put("totalShipped", result[2]);
+            return data;
+        }).collect(Collectors.toList());
     }
 }

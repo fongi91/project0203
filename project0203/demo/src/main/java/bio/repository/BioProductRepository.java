@@ -10,10 +10,10 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface BioProductRepository extends JpaRepository<BioProduct, Long>, BioProductSearch{
+public interface BioProductRepository extends JpaRepository<BioProduct, String>, BioProductSearch{
     //효능군별 개수를 반환하는 쿼리를 추가.
-    @Query("SELECT b.efficacyGroup, COUNT(b) FROM BioProduct b GROUP BY b.efficacyGroup")
-    List<Object[]> countByEfficacyGroup();
+//    @Query("SELECT b.efficacyGroup, COUNT(b) FROM BioProduct b GROUP BY b.efficacyGroup")
+//    List<Object[]> countByEfficacyGroup();
 }
 
 

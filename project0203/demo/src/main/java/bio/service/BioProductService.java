@@ -7,21 +7,22 @@ import bio.repository.BioProductRepository;
 import org.springframework.cglib.core.DuplicatesPredicate;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BioProductService {
     //제품 등록 서비스 로직 메서드
-    public Long register(BioProductDTO bioProductDTO);
+    public String register(BioProductDTO bioProductDTO);
 
-    BioProductDTO readOne(Long bioNo);
+    BioProductDTO readOne(String productCode);
 
     void modify(BioProductDTO bioProductDTO);
 
-    void remove(Long bioNo);
+    void remove(String productCode);
 
     //목록 검색기능 선언
     BioProductPageResponseDTO list(BioProductPageRequestDTO bioProductPageRequestDTO);
 
-    List<Object[]> getEfficacyGroupDistribution();
+    List<Map<String, Object>> getEfficacyGroupDistribution();
 
 
 }

@@ -1,8 +1,7 @@
 package bio.controller;
 
-import bio.domain.EmployeeRole;
 import bio.domain.Employees;
-import bio.service.BioProductInventoryVService;
+import bio.service.BioInvStockService;
 import bio.service.BioProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Log4j2
@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/bio")
 public class DashboardController {
     private final BioProductService bioProductService;
-    private final BioProductInventoryVService bioProductInventoryVService;
+    private final BioInvStockService bioInvStockService;
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model) {
         // 세션에서 사용자 정보 가져오기
@@ -32,11 +32,16 @@ public class DashboardController {
 
 
 
-            List<Object[]> efficacyGroupData = bioProductService.getEfficacyGroupDistribution();
-            model.addAttribute("efficacyGroupData", efficacyGroupData);  // 모델에 데이터 담기
+//            List<Object[]> efficacyGroupData = bioProductService.getEfficacyGroupDistribution();
+//            model.addAttribute("efficacyGroupData", efficacyGroupData);  // 모델에 데이터 담기
 
-            List<Object[]> bioProductInventoryVData = bioProductInventoryVService.getBioProductInventoryVData();
-            model.addAttribute("bioProductInventoryVData", bioProductInventoryVData);
+            List<Map<String, Object>> efficacyGroupData = bioProductService.getEfficacyGroupDistribution();
+            model.addAttribute("efficacyGroupData", efficacyGroupData);
+            log.info("잘 받아왔는지 확인: " + efficacyGroupData);
+
+            // 입고량과 출고량 데이터
+            List<Map<String, Object>> receivedAndShippedData = bioInvStockService.getReceivedAndShippedQuantities();
+            model.addAttribute("receivedAndShippedData", receivedAndShippedData);  // 모델에 데이터 담기
 
             log.info("Employee in session: " + employees);
             log.info("EmployeeRole in session: " + employees.getRole());

@@ -29,5 +29,6 @@ public class BioInvStockDTO {
     private LocalDate lastReceivedDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate lastShippedDate;
+    @NotEmpty
     private String productName;
 }
