@@ -38,7 +38,7 @@ public class Employees extends EmployeesEntity{
     @Enumerated(EnumType.ORDINAL)
     private EmployeeRole role;
 
-    public void change(String employeeid,String employeename, String password, LocalDate hiredate, LocalDate terminationdate, String department, String position, String contactnumber){
+    public void change(String employeeid,String employeename, String password, LocalDate hiredate, LocalDate terminationdate, String department, String position, String contactnumber, EmployeeRole role){
         this.employeeid = employeeid;
         this.employeename = employeename;
         this.password = password;
@@ -47,5 +47,6 @@ public class Employees extends EmployeesEntity{
         this.department = department;
         this.position = position;
         this.contactnumber = contactnumber;
+        this.role = role;
     }
 }

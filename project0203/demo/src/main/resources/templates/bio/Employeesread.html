@@ -39,6 +39,10 @@
                         <input type="text" class="form-control" th:value="${dto.department}" readonly>
                     </div>
                     <div class="input-group mb-3">
+                        <span class="input-group-text" style="width:100px; justify-content: center;">Role</span>
+                        <input type="text" class="form-control" th:value="${dto.role.ordinal()}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
                         <span class="input-group-text" style="width:100px; justify-content: center;">직책</span>
                         <input type="text" class="form-control" th:value="${dto.position}" readonly>
                     </div>

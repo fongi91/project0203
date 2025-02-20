@@ -42,7 +42,7 @@
                         <!-- 부서 선택 -->
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width:100px; justify-content: center;">부서</span>
-                            <select name="department" class="form-select">
+                            <select name="department" class="form-select" id="departmentSelect">
                                 <option value="인사팀" th:selected="${dto.department == '인사팀'}">인사팀</option>
                                 <option value="물류팀" th:selected="${dto.department == '물류팀'}">물류팀</option>
                                 <option value="생산팀" th:selected="${dto.department == '생산팀'}">생산팀</option>
@@ -52,6 +52,14 @@
                                 <option value="구매팀" th:selected="${dto.department == '구매팀'}">구매팀</option>
                                 <option value="재무팀" th:selected="${dto.department == '재무팀'}">재무팀</option>
                                 <option value="admin" th:selected="${dto.department == 'admin'}">admin</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width:100px; justify-content: center;">부서</span>
+                            <select name="role" class="form-select" id="roleSelect">
+                                <option value="0" th:selected="${dto.role.ordinal() == 0}">ADMIN</option>
+                                <option value="1" th:selected="${dto.role.ordinal() == 1}">HR</option>
+                                <option value="2" th:selected="${dto.role.ordinal() == 2}">LOGISTICS</option>
                             </select>
                         </div>
                         <!-- 직책 선택 -->
@@ -139,4 +147,19 @@
         formObj.method = 'post'
         formObj.submit()
     },false)
+
+    //부서 선택시 role 선택
+    document.getElementById("departmentSelect").addEventListener("change", function () {
+    let department = this.value;
+    let roleSelect = document.getElementById("roleSelect");
+
+    if (department === "인사팀") {
+        roleSelect.value = "1"; // HR
+    } else if (department === "물류팀") {
+        roleSelect.value = "2"; // LOGISTICS
+    } else {
+        roleSelect.value = "0"; // 기본값 ADMIN
+    }
+    });
+
 </script>
